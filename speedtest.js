@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         测速网去广告
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  谁用谁知道
 // @author       Meter
 // @match        *://www.speedtest.cn/*
+// @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @grant        none
 // ==/UserScript==
 
