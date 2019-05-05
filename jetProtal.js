@@ -13,24 +13,7 @@
 
 (function() {
     'use strict';
-    $(".user-box").empty();
-    $("body").append("<div id='me_content'><button id='quickOperation' type='button'>快捷操作</button></div>");
-    $("#me_content").css({
-        position: "absolute",
-        bottom: 65,
-        left: 60,
-        zIndex:999
-    });
-    $("#quickOperation").css({
-        background: "#90ce88",
-        cursor: "pointer",
-        border: 0,
-        height: 80,
-        width: 80,
-        borderRadius: 80,
-        color:"#fff",
-        outline: "none"
-    });
+    setQuickOperation();
     setVerificationCode();
 })();
 
@@ -95,5 +78,27 @@ function setVerificationCode(){
             verMonth = '0' + verMonth.toString();
         }
         $('#txtVerificationCode').val(verDate + verMonth)
+    }
+}
+function setQuickOperation(){
+    if(window.location.href.indexOf('Index/Index/Index')>-1){
+        $(".user-box").empty();
+        $("body").append("<div id='me_content'><button id='quickOperation' type='button'>快捷操作</button></div>");
+        $("#me_content").css({
+            position: "absolute",
+            bottom: 65,
+            left: 60,
+            zIndex:999
+        });
+        $("#quickOperation").css({
+            background: "#90ce88",
+            cursor: "pointer",
+            border: 0,
+            height: 80,
+            width: 80,
+            borderRadius: 80,
+            color:"#fff",
+            outline: "none"
+        });
     }
 }
