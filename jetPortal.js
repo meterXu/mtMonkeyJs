@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         jetProtal
-// @namespace    jetProtal
+// @name         jetPortal
+// @namespace    jetPortal
 // @version      1.3
-// @updateURL    https://app.isaacxu.com/tampermonkey/jetProtal.js
+// @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
