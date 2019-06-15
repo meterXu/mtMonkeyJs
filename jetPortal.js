@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         jetPortal
+// @name         捷通portal考勤提醒
 // @namespace    jetPortal
 // @version      1.3
 // @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
