@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mtMonkeyJs</title>
+    <link rel="stylesheet" href="https://app.isaacxu.com/table/src/css/isaac.table.css">
+    <style>
+        html{
+            background: #333;
+        }
+        #tb-f{
+            width: 1000px;
+            height: 600px;
+            margin: 0 auto;
+            margin-top: 200px;
+        }
+        #tb-f h1{
+            text-align: center;
+            color: #fff;
+        }
+        #tb-f h1 span{
+            text-shadow: 0px -3px 0px #000000;
+        }
+        #tb-g{
+            border: 7px solid #212121;
+        }
+        .rcopy{
+            text-decoration-line: underline !important;
+        }
+    </style>
+    <script type="text/javascript" src="https://app.isaacxu.com/table/src/js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="https://app.isaacxu.com/table/src/js/isaac.table.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <script type="text/javascript">
+        let option={
+            multipleSelect: true,
+            checkBox:false,
+            param: { page: 1, rp: 10 },
+            columns: [[
+                { title: "序号", field: "id",width:"100px"  },
+                { title: "名称", field: "name",width:"200px" },
+                { title: "链接", field: "url" },
+                { title: "操作", field: "url",width:"100px",formatter:function(val){
+                    return '<a class="rcopy" href="javascript:;" data-clipboard-text="'+val+'">复制链接</a>'
+                    } }
+            ]],
+            data:{
+                "rows":[
+                    {"id":1,"name":"测速网去广告","url":"https://app.isaacxu.com/tampermonkey/speedtest.js"},
+                    {"id":2,"name":"捷通portal考勤提醒","url":"https://app.isaacxu.com/tampermonkey/jetProtal.js"},
+                ],
+                "total":2
+            }
+        };
+        $(function(){
+            $("#tb1").isaacTable(option);
+            var clipboard=new ClipboardJS('.rcopy');
+            clipboard.on('success', function(e) {
+                alert('链接复制成功')
+            });
+            clipboard.on('error', function(e) {
+                alert('链接复制失败')
+            });
+        })
+    </script>
+</head>
+<body>
+<div id="tb-f">
+    <h1><span>目录列表</span></h1>
+    <div id="tb-g">
+        <table id="tb1"></table>
+    </div>
+</div>
+</body>
+</html>
