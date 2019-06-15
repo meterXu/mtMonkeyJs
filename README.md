@@ -1,4 +1,7 @@
 # mtMonkeyJs
+![GitHub](https://img.shields.io/github/license/meterXu/mtMonkeyJs.svg)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/meterXu/mtMonkeyJs.svg)
+
 [发布网址](https://app.isaacxu.com/tampermonkey/)
 ## 脚本安装
 * 步骤一  
