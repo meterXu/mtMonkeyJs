@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.3
+// @version      1.3.2
 // @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -31,7 +31,7 @@ const staticTime={
     machineErrorTime:120000,//机器误差时间
     siestaTime:3600000,//午休事件
     requireWorkTime:27000000,//需要工作时间
-    firstStartWork:new Date(getToday()+" 09:00:00").valueOf(),//最早上班时间
+    firstStartWork:new Date(getToday()+" 08:30:00").valueOf(),//最早上班时间
     lastStartWork:new Date(getToday()+" 09:30:59").valueOf(),//最晚上班时间
     lastEndWork:new Date(getToday()+" 18:00:00"),//最晚下班时间
     weekday: [1,2,3,4,5]//周一至周五
