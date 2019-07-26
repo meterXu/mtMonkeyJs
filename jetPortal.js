@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.3.2
+// @version      1.3.3
 // @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -286,6 +286,10 @@ function getTodayWorkTimeBeat(){
                     }
                     window.setTimeout(getTodayWorkTimeBeat,1000*1800);//30分钟查询一次上下班时间
                 }else{ // 没有今天的刷卡记录，10分种后再次获取
+                    todayWorkTime.startWorkTime=null;
+                    todayWorkTime.endWorkTime=null;
+                    todayWorkTime.workStartState=3;
+                    todayWorkTime.workEndState=2;
                     window.setTimeout(getTodayWorkTimeBeat,1000*600);
                 }
                 if(!beatObj.hasOwnProperty("endWorkBeat")){
