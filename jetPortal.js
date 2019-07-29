@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.3.3
+// @version      1.3.4
 // @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -312,12 +312,12 @@ function endWorkBeat(){
     }
     var nowTime = (new Date()).valueOf();
     let _startWorkTime = null;
-    if(todayWorkTime.workStartState===0&&GM_getValue("p_n_l_state")==="0"){
+    if(todayWorkTime.workStartState===0&&GM_getValue("p_n_l_state")!=="1"&&staticTime.weekday.indexOf(new Date().getDay())>-1){
         let noticeCon='上班时间：'+new Date(ruleWorkTime.startWorkTime).toLocaleString()+"[迟到]";
         sendNotice("警告-今天迟到了！",noticeCon,nowTime);
         GM_setValue("p_n_l_state","1");
     }
-    if(todayWorkTime.workEndState===0&&GM_getValue("p_n_f_state")==="0"){
+    if(todayWorkTime.workEndState===0&&GM_getValue("p_n_f_state")!=="1"&&staticTime.weekday.indexOf(new Date().getDay())>-1){
         let noticeCon='下班时间：'+new Date(ruleWorkTime.endWorkTime).toLocaleString()+"[早退]";
         sendNotice("警告-今天早退了！",noticeCon,nowTime);
         GM_setValue("p_n_f_state","1");
