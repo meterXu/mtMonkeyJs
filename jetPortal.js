@@ -1,7 +1,7 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.3.4
+// @version      1.3.5
 // @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -301,26 +301,26 @@ function getTodayWorkTimeBeat(){
 }
 
 function endWorkBeat(){
-    let noticeDate = GM_getValue("p_n_date");
-    let noticeState = GM_getValue("p_n_state");
+    let noticeDate = localStorage.getItem("p_n_date");
+    let noticeState = localStorage.getItem("p_n_state");
     if(noticeDate !== getToday()||noticeState===null||noticeState===undefined){
         noticeDate = getToday();
-        GM_setValue("p_n_date",noticeDate);
-        GM_setValue("p_n_state","0");
-        GM_setValue("p_n_l_state","0");
-        GM_setValue("p_n_f_state","0");
+        localStorage.setItem("p_n_date",noticeDate);
+        localStorage.setItem("p_n_state","0");
+        localStorage.setItem("p_n_l_state","0");
+        localStorage.setItem("p_n_f_state","0");
     }
     var nowTime = (new Date()).valueOf();
     let _startWorkTime = null;
-    if(todayWorkTime.workStartState===0&&GM_getValue("p_n_l_state")!=="1"&&staticTime.weekday.indexOf(new Date().getDay())>-1){
+    if(todayWorkTime.workStartState===0&&localStorage.getItem("p_n_l_state")!=="1"&&staticTime.weekday.indexOf(new Date().getDay())>-1){
         let noticeCon='上班时间：'+new Date(ruleWorkTime.startWorkTime).toLocaleString()+"[迟到]";
         sendNotice("警告-今天迟到了！",noticeCon,nowTime);
-        GM_setValue("p_n_l_state","1");
+        localStorage.setItem("p_n_l_state","1");
     }
-    if(todayWorkTime.workEndState===0&&GM_getValue("p_n_f_state")!=="1"&&staticTime.weekday.indexOf(new Date().getDay())>-1){
+    if(todayWorkTime.workEndState===0&&localStorage.getItem("p_n_f_state")!=="1"&&staticTime.weekday.indexOf(new Date().getDay())>-1){
         let noticeCon='下班时间：'+new Date(ruleWorkTime.endWorkTime).toLocaleString()+"[早退]";
         sendNotice("警告-今天早退了！",noticeCon,nowTime);
-        GM_setValue("p_n_f_state","1");
+        localStorage.setItem("p_n_f_state","1");
     }
     if(todayWorkTime.startWorkTime){
         _startWorkTime= todayWorkTime.startWorkTime;
@@ -330,14 +330,14 @@ function endWorkBeat(){
     let _endWorkTime = _startWorkTime+staticTime.siestaTime+staticTime.requireWorkTime+staticTime.machineErrorTime;
     if(nowTime>=_endWorkTime
         &&todayWorkTime.workEndState===2
-        &&GM_getValue("p_n_state")!=="1"
+        &&localStorage.getItem("p_n_state")!=="1"
         &&staticTime.weekday.indexOf(new Date().getDay())>-1){//今天时间到了，下班未刷卡，周一-周五，未通知
         //通知下班
         let noticeCon='上班时间为:'+(ruleWorkTime.startWorkTime==null?"-":new Date(ruleWorkTime.startWorkTime).toLocaleString())+"["+startWorkStateText(todayWorkTime.workStartState)+"]"+
             '\r\n应下班时间为:'+new Date(_endWorkTime).toLocaleString();
         sendNotice("提醒-今天可以下班啦！",noticeCon,nowTime);
-        GM_setValue("p_n_date",getToday());
-        GM_setValue("p_n_state","1");
+        localStorage.setItem("p_n_date",getToday());
+        localStorage.setItem("p_n_state","1");
     }
     let id=window.setTimeout(endWorkBeat,1000*30);//下班计算心跳30秒一次
     beatObj.endWorkBeat=id;
