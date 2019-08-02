@@ -1,7 +1,7 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.3.5
+// @version      1.3.6
 // @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -309,6 +309,10 @@ function endWorkBeat(){
         localStorage.setItem("p_n_state","0");
         localStorage.setItem("p_n_l_state","0");
         localStorage.setItem("p_n_f_state","0");
+        todayWorkTime.startWorkTime = null;
+        todayWorkTime.endWorkTime = null;
+        todayWorkTime.workStartState = 3;
+        todayWorkTime.workEndState = 2;
     }
     var nowTime = (new Date()).valueOf();
     let _startWorkTime = null;
