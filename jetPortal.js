@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.3.6
+// @version      1.3.7
 // @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -286,10 +286,7 @@ function getTodayWorkTimeBeat(){
                     }
                     window.setTimeout(getTodayWorkTimeBeat,1000*1800);//30分钟查询一次上下班时间
                 }else{ // 没有今天的刷卡记录，10分种后再次获取
-                    todayWorkTime.startWorkTime=null;
-                    todayWorkTime.endWorkTime=null;
-                    todayWorkTime.workStartState=3;
-                    todayWorkTime.workEndState=2;
+                    resetData();
                     window.setTimeout(getTodayWorkTimeBeat,1000*600);
                 }
                 if(!beatObj.hasOwnProperty("endWorkBeat")){
@@ -304,17 +301,9 @@ function endWorkBeat(){
     let noticeDate = localStorage.getItem("p_n_date");
     let noticeState = localStorage.getItem("p_n_state");
     if(noticeDate !== getToday()||noticeState===null||noticeState===undefined){
-        noticeDate = getToday();
-        localStorage.setItem("p_n_date",noticeDate);
-        localStorage.setItem("p_n_state","0");
-        localStorage.setItem("p_n_l_state","0");
-        localStorage.setItem("p_n_f_state","0");
-        todayWorkTime.startWorkTime = null;
-        todayWorkTime.endWorkTime = null;
-        todayWorkTime.workStartState = 3;
-        todayWorkTime.workEndState = 2;
+        resetData();
     }
-    var nowTime = (new Date()).valueOf();
+    let nowTime = (new Date()).valueOf();
     let _startWorkTime = null;
     if(todayWorkTime.workStartState===0&&localStorage.getItem("p_n_l_state")!=="1"&&staticTime.weekday.indexOf(new Date().getDay())>-1){
         let noticeCon='上班时间：'+new Date(ruleWorkTime.startWorkTime).toLocaleString()+"[迟到]";
@@ -459,4 +448,18 @@ function mAlert(msg){
     window.setTimeout(()=>{
         $(".m_dialog").remove();
     },1000);
+}
+function resetData() {
+    let noticeDate = getToday();
+    localStorage.setItem("p_n_date",noticeDate);
+    localStorage.setItem("p_n_state","0");
+    localStorage.setItem("p_n_l_state","0");
+    localStorage.setItem("p_n_f_state","0");
+    staticTime.firstStartWork = new Date(getToday()+" 08:30:00").valueOf();//最早上班时间
+    staticTime.lastStartWork = new Date(getToday()+" 09:30:59").valueOf();//最晚上班时间
+    staticTime.lastEndWork = new Date(getToday()+" 18:00:00");//最晚下班时间
+    todayWorkTime.startWorkTime = null;
+    todayWorkTime.endWorkTime = null;
+    todayWorkTime.workStartState = 3;
+    todayWorkTime.workEndState = 2;
 }
