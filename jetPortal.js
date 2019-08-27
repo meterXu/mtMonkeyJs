@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.3.8
+// @version      1.3.9
 // @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -305,11 +305,13 @@ function endWorkBeat() {
         let noticeCon = '上班时间：' + new Date(ruleWorkTime.startWorkTime).toLocaleString() + "[迟到]";
         sendNotice("警告-今天迟到了！", noticeCon, nowTime);
         localStorage.setItem("p_n_l_state", "1");
+        localStorage.setItem('p_n_l_time',(new Date()).toLocaleString())
     }
     if (todayWorkTime.workEndState === 0 && localStorage.getItem("p_n_f_state") !== "1" && staticTime.weekday.indexOf(new Date().getDay()) > -1) {
         let noticeCon = '下班时间：' + new Date(ruleWorkTime.endWorkTime).toLocaleString() + "[早退]";
         sendNotice("警告-今天早退了！", noticeCon, nowTime);
         localStorage.setItem("p_n_f_state", "1");
+        localStorage.setItem('p_n_f_time',(new Date()).toLocaleString())
     }
     if (todayWorkTime.startWorkTime) {
         _startWorkTime = todayWorkTime.startWorkTime;
@@ -327,6 +329,7 @@ function endWorkBeat() {
         sendNotice("提醒-今天可以下班啦！", noticeCon, nowTime);
         localStorage.setItem("p_n_date", getToday());
         localStorage.setItem("p_n_state", "1");
+        localStorage.setItem('p_n_time',(new Date()).toLocaleString())
     }
     let id = window.setTimeout(endWorkBeat, 1000 * 30);//下班计算心跳30秒一次
     beatObj.endWorkBeat = id;
@@ -448,7 +451,7 @@ function mAlert(msg) {
 function resetData() {
     let noticeDate = localStorage.getItem("p_n_date");
     if (noticeDate !== getToday()) {
-        localStorage.setItem("p_n_date", noticeDate);
+        localStorage.setItem("p_n_date", getToday());
         localStorage.setItem("p_n_state", "0");
         localStorage.setItem("p_n_l_state", "0");
         localStorage.setItem("p_n_f_state", "0");
