@@ -5,7 +5,7 @@
 [发布网址](https://app.isaacxu.com/tampermonkey/)
 ## 脚本安装
 * 步骤一  
-chrome浏览器安装tampermonkey插件   
+chrome浏览器安装tampermonkey插件或者直接安装离线版本，地址：[https://app.isaacxu.com/tampermonkey/Tampermonkey.zip](https://app.isaacxu.com/tampermonkey/Tampermonkey.zip)，
 打开tampermonkey的**实用工具**菜单，在最下面的url一栏填入脚本路径
 
 * 步骤二  
