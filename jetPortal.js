@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.3.9
+// @version      1.4.0
 // @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -166,7 +166,7 @@ function setVerificationCode() {
         if (verMonth < 10) {
             verMonth = '0' + verMonth.toString();
         }
-        $('#txtVerificationCode').val(verDate + verMonth);
+        $('#txtVerificationCode').val(verDate.toString() + verMonth.toString());
         autoLogin();
     }
 }
