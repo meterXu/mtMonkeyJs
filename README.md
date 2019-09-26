@@ -2,7 +2,7 @@
 ![GitHub](https://img.shields.io/github/license/meterXu/mtMonkeyJs.svg)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/meterXu/mtMonkeyJs.svg)
 
-[发布网址](https://laughing-edison-329ef4.netlify.com/)
+[发布网址](https://tampermonkey.isaacxu.com)
 ## 脚本安装
 * 步骤一  
 chrome浏览器安装tampermonkey插件或者直接安装离线版本，地址：[https://app.isaacxu.com/tampermonkey/Tampermonkey.zip](https://app.isaacxu.com/tampermonkey/Tampermonkey.zip)，
