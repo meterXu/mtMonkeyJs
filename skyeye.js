@@ -7,7 +7,7 @@
 // @author       Meter
 // @include      *://www.tianyancha.com/search*
 // @include      *://www.tianyancha.com/company/*
-// @updateURL    https://app.isaacxu.com/tampermonkey/skyeye.js
+// @updateURL    https://tampermonkey.isaacxu.com/skyeye.js
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
 // @run-at       document-idle

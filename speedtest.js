@@ -5,7 +5,7 @@
 // @description  谁用谁知道
 // @author       Meter
 // @match        *://www.speedtest.cn/*
-// @updateURL    https://app.isaacxu.com/tampermonkey/speedtest.js
+// @updateURL    https://tampermonkey.isaacxu.com/speedtest.js
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
 // @grant        none

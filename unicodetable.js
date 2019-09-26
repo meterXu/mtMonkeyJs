@@ -6,7 +6,7 @@
 // @description  烦人的广告
 // @author       Meter
 // @include      *://unicode-table.com*
-// @updateURL    https://app.isaacxu.com/tampermonkey/unicodetable.js
+// @updateURL    https://tampermonkey.isaacxu.com/unicodetable.js
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
 // @run-at       document-idle

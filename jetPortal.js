@@ -2,7 +2,7 @@
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
 // @version      1.4.0
-// @updateURL    https://app.isaacxu.com/tampermonkey/jetPortal.js
+// @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
