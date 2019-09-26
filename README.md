@@ -10,7 +10,7 @@ chrome浏览器安装tampermonkey插件或者直接安装离线版本，地址�
 
 * 步骤二  
 本项目的脚本发布路径为
-[点我跳转](https://laughing-edison-329ef4.netlify.com/) ，在脚本列表界面选择需要安装的脚本，点击**复制链接**
+[点我跳转](https://tampermonkey.isaacxu.com/) ，在脚本列表界面选择需要安装的脚本，点击**复制链接**
 
 * 步骤三    
 在url一栏填入脚本路径，在跳转的新页面上点击**安装**按钮即可
