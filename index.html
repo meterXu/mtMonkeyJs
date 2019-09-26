@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
     <title>mtMonkeyJs</title>
     <link rel="stylesheet" href="https://app.isaacxu.com/table/src/css/isaac.table.css">
     <style>
@@ -9,7 +10,7 @@
             background: #333;
         }
         #tb-f{
-            width: 1000px;
+            max-width: 1000px;
             height: 600px;
             margin: 0 auto;
             margin-top: 200px;
@@ -30,15 +31,56 @@
         }
         #tb-g{
             border: 7px solid #212121;
+            max-width: 1000px;
+            overflow: auto;
         }
         .rcopy{
             text-decoration-line: underline !important;
+        }
+        .isaac_table{
+            width: 986px;
+        }
+        #isaacTable_basefooter_0{
+            width: 976px;
+        }
+        .tooltip{
+            font-size: 10px;
+
+            color: #fff;
+        }
+        .tooltip .tooltip-arrow{
+            width: 0;
+            height: 0;
+            border: 4px solid;
+            border-color: transparent green transparent transparent;
+            float: left;
+            margin-top: 6px;
+        }
+        .tooltip .tooltip-inner{
+            padding: 2px 3px;
+            background: green;
+            float: left;
+        }
+        .success .tooltip-arrow{
+            border-color: transparent green transparent transparent;
+        }
+        .success .tooltip-inner{
+            background: green;
+        }
+        .error .tooltip-arrow{
+            border-color: transparent red transparent transparent;
+        }
+        .error .tooltip-inner{
+            background: red;
         }
     </style>
     <script type="text/javascript" src="https://app.isaacxu.com/table/src/js/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="https://app.isaacxu.com/table/src/js/isaac.table.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="https://unpkg.com/popper.js@^1"></script>
+    <script src="https://unpkg.com/tooltip.js@^1"></script>
     <script type="text/javascript">
+        let baseurl = window.location.href;
         let option={
             multipleSelect: true,
             checkBox:false,
@@ -47,26 +89,70 @@
                 { title: "序号", field: "id",width:"100px"  },
                 { title: "名称", field: "name",width:"200px" },
                 { title: "链接", field: "url" },
-                { title: "操作", field: "url",width:"100px",formatter:function(val){
+                { title: "操作", field: "url",width:"120px",formatter:function(val){
                     return '<a class="rcopy" href="javascript:;" data-clipboard-text="'+val+'">复制链接</a>'
                     } }
             ]],
             data:{
                 "rows":[
-                    {"id":1,"name":"测速网去广告","url":"https://app.isaacxu.com/tampermonkey/speedtest.js"},
-                    {"id":2,"name":"捷通portal考勤提醒","url":"https://app.isaacxu.com/tampermonkey/jetPortal.js"},
+                    {"id":1,"name":"捷通portal考勤提醒","url":baseurl+"jetPortal.js"},
+                    {"id":2,"name":"测速网去广告","url":baseurl+"speedtest.js"},
+                    {"id":3,"name":"unicode-table去广告","url":baseurl+"unicodetable.js"},
                 ],
                 "total":2
             }
         };
         $(function(){
+            let tooltip=null;
+            let toolTipS={};
             $("#tb1").isaacTable(option);
-            var clipboard=new ClipboardJS('.rcopy');
-            clipboard.on('success', function(e) {
-                alert('链接复制成功')
-            });
-            clipboard.on('error', function(e) {
-                alert('链接复制失败')
+            $(".rcopy").each((c,e)=>{
+                let clipboard=new ClipboardJS(e);
+                clipboard.on('success', function() {
+                    if(toolTipS.hasOwnProperty(c.toString())){
+                        window.setTimeout(()=>{
+                            toolTipS[c.toString()].show();
+                        },200);
+                    }else{
+                        let xx = new Tooltip(e,{
+                            placement:'right',
+                            title:'复制成功',
+                            trigger:'manual',
+                            container:document.querySelector('.success')
+                        });
+                        window.setTimeout(()=>{
+                            xx.show();
+                        },200);
+                        toolTipS[c.toString()]=xx;
+                    }
+
+                });
+                clipboard.on('error', function() {
+                    if(toolTipS.hasOwnProperty(c.toString())){
+                        toolTipS[c.toString()].updateTitleContent('复制失败');
+                        window.setTimeout(()=>{
+                            toolTipS[c.toString()].show();
+                        },200);
+                    }else{
+                        let xx = new Tooltip(e,{
+                            placement:'right',
+                            title:'复制失败',
+                            trigger:'manual',
+                            container:document.querySelector('.error')
+                        });
+                        window.setTimeout(()=>{
+                            xx.show();
+                        },200);
+                        toolTipS[c.toString()]=xx;
+                    }
+                });
+                $(e).mouseout(()=>{
+                    if(toolTipS.hasOwnProperty(c.toString())){
+                        window.setTimeout(()=>{
+                            toolTipS[c.toString()].hide();
+                        },100)
+                    }
+                })
             });
         })
     </script>
@@ -78,6 +164,8 @@
     <div id="tb-g">
         <table id="tb1"></table>
     </div>
+    <div class="success"></div>
+    <div class="error"></div>
 </div>
 </body>
 </html>
