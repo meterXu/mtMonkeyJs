@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.0
+// @version      1.4.1
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -10,7 +10,7 @@
 // @match        http://portal.dcjet.com.cn:8989/Portal/Index/Index/Index
 // @match        http://portal.dcjet.com.cn:8989/Login.aspx
 // @match        http://portal.dcjet.com.cn:8989/Login.aspx?logout=1
-// @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
+// @require      https://code.jquery.com/jquery-2.0.0.min.js
 // @run-at       document-idle
 // @grant        unsafeWindow
 // @grant        GM_setValue
@@ -20,8 +20,8 @@
 let todayWorkTime = {
     startWorkTime: null,
     endWorkTime: null,
-    workStartState: 3,
-    workEndState: 2,
+    workStartState: null,
+    workEndState: null,
 };
 let ruleWorkTime = {
     startWorkTime: null,
