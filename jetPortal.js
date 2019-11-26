@@ -38,7 +38,8 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-$("head").append('<link href="https://tampermonkey.isaacxu.com/jetPortal.css" rel="stylesheet">');
+// $("head").append('<link href="https://tampermonkey.isaacxu.com/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="http://192.168.12.105/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
     setQuickOperation();
@@ -58,37 +59,6 @@ function showSetting() {
         "<tr><td colspan='2'><button id='savePortalData' type='button'>保存</button> <button id='closeMPDialog' type='button'>关闭</button></td></tr>" +
         "</table>" +
         "</div></div>");
-    $("#m_p_setting").css({
-        width: '40px',
-        textAlign: 'center',
-        height: '24px',
-        lineHeight: '24px',
-        position: 'absolute',
-        right: '50px',
-        bottom: '5px',
-        cursor: 'pointer',
-        color: '#fff',
-        background: 'rgb(77, 80, 82)',
-        border: '1px solid rgb(86, 86, 86)'
-    });
-    $("#m_p_setting_dialog").css({
-        position: 'absolute',
-        left: "0",
-        top: "0",
-        right: '0',
-        bottom: '0',
-        background: "rgba(51, 51, 51,0.8)",
-        zIndex: "998",
-        textAlign: "center",
-        display: "none"
-    });
-    $("#m_p_setting_con").css({
-        width: "400px",
-        height: "300px",
-        marginTop: "200px",
-        background: "#fff",
-        display: "inline-block"
-    });
     $("#m_p_setting").click(function () {
         let userName = GM_getValue("m_p_username");
         let passwd = GM_getValue("m_p_passwd");
@@ -200,70 +170,13 @@ function setQuickOperation() {
             '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡明细</a></li>'+
             '</ul>'
             +'</div>');
-        // style
-        $(".workInfo").css({
-            'margin': '0 10px',
-            'margin-top': '80px',
-            'color': 'rgb(255, 255, 255)',
-            'padding': '5px 5px',
-            'line-height': '23px',
-            'background': '#3065ae',
-            'border': '1px solid #0f3467'
-        });
-        $(".workInfo dd").css({
-            'font-weight': 'bold'
-        });
-        $(".workInfo dt").css({
-            'text-indent': '15px'
-        });
-        $(".workInfo dd:first").css({
-            'color': '#b9e2ff'
-        });
-        $(".workInfo dd:last").css({
-            'color': '#ffb398'
-        });
-        // $(".quick-operation::before").css({
-        //     'content': "时光机",
-        //     'line-height': '80px',
-        //     'text-align': 'center',
-        //     'color': 'white'
-        // });
-        // $(".operation").css({
-        //     'position': 'absolute',
-        //     'left': '80px',
-        //     'width': '100px',
-        //     'top': '-40px'
-        // });
-        // $(".operation li").css({
-        //     'list-style': 'none',
-        //     'width': '90px',
-        //     'height': '28px',
-        //     'line-height': '28px',
-        //     'border-radius': '4px',
-        //     'background': '#048e86',
-        //     'color': 'white',
-        //     'margin-top': '10px'
-        // });
-        // $(".operation li:first").css({
-        //     transform: 'rotate(-30deg)',
-        //     transition: 'transform .2s'
-        // });
-        //
-        // $(".operation li:first").css({
-        //     transform: 'rotate(0deg)',
-        //     transition: 'transform .2s'
-        // });
-        //
-        // $(".quick-operation:hover .operation li:first").css({
-        //     transform: 'rotate(-30deg)',
-        // });
         // evnet
-        // $(".operation a").click(c=>{
-        //     let url = c.target.getAttribute('data-href');
-        //     let pageCode = c.target.getAttribute('data-pagecode');
-        //     let title = c.target.innerText;
-        //     base.tabs.add(pageCode,title,url)
-        // })
+        $(".operation a").click(c=>{
+            let url = c.target.getAttribute('data-href');
+            let pageCode = c.target.getAttribute('data-pagecode');
+            let title = c.target.innerText;
+            base.tabs.add(pageCode,title,url)
+        })
     }
 }
 function loginBeat() {

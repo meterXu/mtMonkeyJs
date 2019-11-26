@@ -1,3 +1,55 @@
+#m_p_setting{
+    width: 40px;
+    textAlign: center;
+    height: 24px;
+    lineHeight: 24px;
+    position: absolute;
+    right: 50px;
+    bottom: 5px;
+    cursor: pointer;
+    color: #fff;
+    background: rgb(77, 80, 82);
+    border: 1px solid rgb(86, 86, 86)
+}
+#m_p_setting_dialog{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(51, 51, 51,0.8);
+    zIndex: 998;
+    textAlign: center;
+    display: none
+}
+#m_p_setting_con{
+    width: 400px;
+    height: 300px;
+    marginTop: 200px;
+    background: #fff;
+    display: inline-block
+}
+.workInfo{
+margin: 0 10px;
+margin-top: 80px;
+color: #fff;
+padding: 5px 5px;
+line-height: 23px;
+background: #3065ae;
+border: 1px solid #0f3467
+}
+.workInfo dd{
+    font-weight: bold
+}
+.workInfo dt{
+text-indent: 15px
+}
+.workInfo dd:first-child {
+color: #b9e2ff
+}
+.workInfo dd:last-child{
+color: #ffb398
+}
 .quick-operation {
     margin-top: 100px;
     position: relative;
@@ -6,4 +58,34 @@
     border-radius: 40px;
     background: #e52969;
     text-align: center
+}
+.quick-operation::before{
+content: '时光机';
+line-height: 80px;
+text-align: center;
+color: white
+}
+.operation{
+position: absolute;
+left: 80px;
+width: 100px;
+top: -40px
+}
+.operation li{
+list-style: none;
+width: 90px;
+height: 28px;
+line-height: 28px;
+border-radius: 4px;
+background: #048e86;
+color: white;
+margin-top: 10px
+}
+.operation li:first-child {
+    transform: rotate(0deg);
+    transition: transform .2s
+}
+
+.quick-operation:hover .operation li:first-child {
+    transform: rotate(-30deg)
 }
