@@ -38,8 +38,8 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-// $("head").append('<link href="https://tampermonkey.isaacxu.com/jetPortal.css" rel="stylesheet">');
-$("head").append('<link href="http://192.168.12.105/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="https://tampermonkey.isaacxu.com/jetPortal.css" rel="stylesheet">');
+// $("head").append('<link href="http://192.168.12.105/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
     setQuickOperation();
