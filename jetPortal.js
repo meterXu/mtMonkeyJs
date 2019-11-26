@@ -38,6 +38,7 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
+$("head").append('<link href="https://tampermonkey.isaacxu.com/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
     setQuickOperation();
@@ -119,30 +120,30 @@ function setVerificationCode() {
             case 8:
             case 10:
             case 12:
-                {
-                    if (verDate === 31) {
-                        verDate = 1
-                    } else {
-                        verDate++
-                    }
-                    if (verMonth === 12) {
-                        verMonth = 1
-                    } else {
-                        verMonth++
-                    }
-                } break;
+            {
+                if (verDate === 31) {
+                    verDate = 1
+                } else {
+                    verDate++
+                }
+                if (verMonth === 12) {
+                    verMonth = 1
+                } else {
+                    verMonth++
+                }
+            } break;
             case 4:
             case 6:
             case 9:
             case 11:
-                {
-                    if (verDate === 30) {
-                        verDate = 1
-                    } else {
-                        verDate++
-                    }
-                    verMonth++
-                } break;
+            {
+                if (verDate === 30) {
+                    verDate = 1
+                } else {
+                    verDate++
+                }
+                verMonth++
+            } break;
             case 2: {
                 if (newTime.getFullYear() % 4 === 0 && newTime.getFullYear() % 400 === 0) {
                     if (verDate === 29) {
@@ -183,23 +184,86 @@ function autoLogin() {
 function setQuickOperation() {
     if (window.location.href.indexOf('Index/Index/Index') > -1) {
         $(".user-box").hide();
-        $("body").append("<div id='me_content'><button id='quickOperation' type='button'>快捷操作</button></div>");
-        $("#me_content").css({
-            position: "absolute",
-            bottom: 65,
-            left: 60,
-            zIndex: 999
+        $(".left-side-inner").append('<div class="workInfo">'+
+            '<dl>'+
+            '<dd>上班时间:</dd>'+
+            '<dt id="startTime">-</dt>'+
+            '<dd>拟下班时间:</dd>'+
+            '<dt id="endTime">-</dt>'
+            +'</dl>'
+            +'</div>'+
+            '<div class="quick-operation">' +
+            '<ul class="operation">' +
+            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡明细</a></li>'+
+            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡明细</a></li>'+
+            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡明细</a></li>'+
+            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡明细</a></li>'+
+            '</ul>'
+            +'</div>');
+        // style
+        $(".workInfo").css({
+            'margin': '0 10px',
+            'margin-top': '80px',
+            'color': 'rgb(255, 255, 255)',
+            'padding': '5px 5px',
+            'line-height': '23px',
+            'background': '#3065ae',
+            'border': '1px solid #0f3467'
         });
-        $("#quickOperation").css({
-            background: "#90ce88",
-            cursor: "pointer",
-            border: 0,
-            height: 80,
-            width: 80,
-            borderRadius: 80,
-            color: "#fff",
-            outline: "none"
+        $(".workInfo dd").css({
+            'font-weight': 'bold'
         });
+        $(".workInfo dt").css({
+            'text-indent': '15px'
+        });
+        $(".workInfo dd:first").css({
+            'color': '#b9e2ff'
+        });
+        $(".workInfo dd:last").css({
+            'color': '#ffb398'
+        });
+        // $(".quick-operation::before").css({
+        //     'content': "时光机",
+        //     'line-height': '80px',
+        //     'text-align': 'center',
+        //     'color': 'white'
+        // });
+        // $(".operation").css({
+        //     'position': 'absolute',
+        //     'left': '80px',
+        //     'width': '100px',
+        //     'top': '-40px'
+        // });
+        // $(".operation li").css({
+        //     'list-style': 'none',
+        //     'width': '90px',
+        //     'height': '28px',
+        //     'line-height': '28px',
+        //     'border-radius': '4px',
+        //     'background': '#048e86',
+        //     'color': 'white',
+        //     'margin-top': '10px'
+        // });
+        // $(".operation li:first").css({
+        //     transform: 'rotate(-30deg)',
+        //     transition: 'transform .2s'
+        // });
+        //
+        // $(".operation li:first").css({
+        //     transform: 'rotate(0deg)',
+        //     transition: 'transform .2s'
+        // });
+        //
+        // $(".quick-operation:hover .operation li:first").css({
+        //     transform: 'rotate(-30deg)',
+        // });
+        // evnet
+        // $(".operation a").click(c=>{
+        //     let url = c.target.getAttribute('data-href');
+        //     let pageCode = c.target.getAttribute('data-pagecode');
+        //     let title = c.target.innerText;
+        //     base.tabs.add(pageCode,title,url)
+        // })
     }
 }
 function loginBeat() {
@@ -319,6 +383,8 @@ function endWorkBeat() {
         _startWorkTime = staticTime.firstStartWork;
     }
     let _endWorkTime = _startWorkTime + staticTime.siestaTime + staticTime.requireWorkTime + staticTime.machineErrorTime;
+    $("#startTime").text(ruleWorkTime.startWorkTime == null ? "-" : (parseJsonDate(new Date(ruleWorkTime.startWorkTime),'HH:mm:ss')+"["+startWorkStateText(todayWorkTime.workStartState)+"]"));
+    $("#endTime").text(_endWorkTime == null ? "-" : parseJsonDate(new Date(_endWorkTime),'HH:mm:ss'));
     if (nowTime >= _endWorkTime
         && todayWorkTime.workEndState === 2
         && localStorage.getItem("p_n_state") !== "1"
@@ -348,6 +414,9 @@ function startWorkStateText(state) {
         case 3: {
             return "未刷卡"
         }
+        default:{
+            return "未知"
+        }
     }
 }
 
@@ -361,6 +430,9 @@ function endWorkStateText(state) {
         }
         case 2: {
             return "未刷卡"
+        }
+        default:{
+            return "未知"
         }
     }
 }
@@ -403,14 +475,17 @@ function parseJsonDate(dateJson, formatter) {
     switch (formatter) {
         case "yyyy-MM-dd HH:mm": {
             return year + "-" + month + "-" + date + " " + hours + ":" + minutes;
-        } break;
+        }
         case "yyyy-MM-dd": {
             return year + "-" + month + "-" + date;
-        } break;
+        }
+        case "HH:mm:ss": {
+            return hours + ":" + minutes+":"+seconds;
+        }
         case "yyyy-MM-dd HH:mm:ss":
         default: {
             return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
-        } break;
+        }
     }
 }
 function sendNotice(title, msg, tag) {

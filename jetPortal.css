@@ -1,0 +1,9 @@
+.quick-operation {
+    margin-top: 100px;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background: #e52969;
+    text-align: center
+}
