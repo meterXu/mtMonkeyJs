@@ -1,8 +1,8 @@
 #m_p_setting{
     width: 40px;
-    textAlign: center;
+    text-align: center;
     height: 24px;
-    lineHeight: 24px;
+    line-height: 24px;
     position: absolute;
     right: 50px;
     bottom: 5px;
@@ -18,14 +18,14 @@
     right: 0;
     bottom: 0;
     background: rgba(51, 51, 51,0.8);
-    zIndex: 998;
-    textAlign: center;
+    z-index: 998;
+    text-align: center;
     display: none
 }
 #m_p_setting_con{
     width: 400px;
     height: 300px;
-    marginTop: 200px;
+    margin-top: 200px;
     background: #fff;
     display: inline-block
 }
