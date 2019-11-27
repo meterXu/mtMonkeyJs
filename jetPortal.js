@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.1
+// @version      1.4.2
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
