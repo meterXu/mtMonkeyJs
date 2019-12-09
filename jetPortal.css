@@ -45,10 +45,10 @@ border: 1px solid #0f3467
 text-indent: 15px
 }
 .workInfo dd:first-child {
-color: #b9e2ff
+color: #b9e2ff;
 }
-.workInfo dd:last-child{
-color: #ffb398
+.workInfo dd{
+color: #ffb398;
 }
 .quick-operation {
     margin-top: 100px;
