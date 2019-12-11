@@ -93,6 +93,8 @@ function realPost(res) {
                         cusNo: $("#txtDeclareFormNo").val(),
                         state: null
                     });
+                    reStart();
+
                 }
             },
             error: function () {
@@ -101,6 +103,7 @@ function realPost(res) {
                     cusNo: $("#txtDeclareFormNo").val(),
                     state: null
                 });
+                reStart();
             },
             complete: function () {
                 dataIndex++;
@@ -227,9 +230,7 @@ function setForm() {
                         }
                     }
                 }
-                if (resArray.length === dataNum) {
-                    saveDataToDb();
-                }
+                reStart();
             },
             error: function () {
                 wirteLog('提交表单失败');
@@ -237,12 +238,16 @@ function setForm() {
                     cusNo: $("#txtDeclareFormNo").val(),
                     state: null
                 });
-                if (resArray.length === dataNum) {
-                    saveDataToDb();
-                }
+                reStart();
             }
         })
     });
+}
+
+function reStart() {
+    if (resArray.length === dataNum) {
+        saveDataToDb();
+    }
 }
 
 function saveDataToDb() {
