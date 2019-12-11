@@ -16,7 +16,7 @@
 // @grant        GM_getValue
 // ==/UserScript==
 let state = true;
-let dataNum = 2;
+let dataNum = 8;
 let dataIndex = 0;
 let backUrl = 'http://work.isaacxu.com/yyjkwebapi/api/';
 let resArray = [];
