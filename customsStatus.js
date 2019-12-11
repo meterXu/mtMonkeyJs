@@ -174,7 +174,7 @@ function resetViewState() {
             if (execs && viewExecs && actionExecs) {
                 wirteLog('重置viewState成功');
                 isResetViewSate=true;
-                waitTime=8;
+                waitTime=10;
                 let newUrl = execs[0];
                 newUrl = newUrl.replace(/&amp;/g, "&");
                 $("img[align='absmiddle']").attr('src', newUrl);
