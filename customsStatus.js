@@ -98,7 +98,7 @@ function wirteLog(text){
     $(function(){
         $("body").append("<div id='dc_contorl'><div><div><button id='dc_btn'>暂停</button></div><div><textarea id='dc_log'></textarea></div></div>");
         $("#dc_contorl").css({
-            width:'300px',
+            width:'450px',
             position:'absolute',
             top:'50px',
             right:'50px'
