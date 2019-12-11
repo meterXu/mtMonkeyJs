@@ -70,7 +70,7 @@ function startRobot(time){
                 wirteLog('发现页面不可爬，轮询等待');
                 window.setTimeout(c=>{
                     window.location.href=window.location.href;
-                },10000)
+                },8000)
 
             }
         }else{
