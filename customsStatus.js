@@ -21,6 +21,7 @@ let dataIndex = 0;
 let backUrl = 'http://work.isaacxu.com/yyjkwebapi/api/';
 let resArray = [];
 let waitTime = 30;
+let defaultWaitTime = waitTime;
 let isResetViewSate = true;
 function startRobot(time) {
     if (state) {
@@ -174,7 +175,7 @@ function resetViewState() {
             if (execs && viewExecs && actionExecs) {
                 wirteLog('重置viewState成功');
                 isResetViewSate=true;
-                waitTime=30;
+                waitTime=defaultWaitTime;
                 let newUrl = execs[0];
                 newUrl = newUrl.replace(/&amp;/g, "&");
                 $("img[align='absmiddle']").attr('src', newUrl);
