@@ -20,7 +20,7 @@ let dataNum = 8;
 let dataIndex = 0;
 let backUrl = 'http://work.isaacxu.com/yyjkwebapi/api/';
 let resArray = [];
-let waitTime = 30;
+let waitTime = 15;
 let defaultWaitTime = waitTime;
 let isResetViewSate = true;
 function startRobot(time) {
