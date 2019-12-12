@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         报关单状态
+// @name         报关单状态查询
 // @namespace    customs
-// @version      1.0
-// @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
+// @version      1.1
+// @updateURL    https://tampermonkey.isaacxu.com/customsStatus.js
 // @license      LGPL-3.0
 // @description  报关单状态查询
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
