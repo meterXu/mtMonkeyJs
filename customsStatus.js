@@ -95,7 +95,7 @@ function realPost() {
                         $("#submitBtn").click();
                     }, 1000)
                 } else {
-                    wirteLog('['+dataIndex+1+']验证码不正确：' + res.code);
+                    wirteLog('['+(dataIndex+1)+']验证码不正确：' + res.code);
                     resArray.push({
                         cusNo: $("#txtDeclareFormNo").val(),
                         state: null
@@ -104,7 +104,7 @@ function realPost() {
                 }
             },
             error: function () {
-                wirteLog('['+dataIndex+1+']获取验证码失败');
+                wirteLog('['+(dataIndex+1)+']获取验证码失败');
                 resArray.push({
                     cusNo: $("#txtDeclareFormNo").val(),
                     state: null
@@ -222,7 +222,7 @@ function setForm() {
             success: function (data) {
                 let execRe = reResult.exec(data);
                 if (execRe) {
-                    wirteLog('['+dataIndex+1+']爬取到结果：' + execRe);
+                    wirteLog('['+(dataIndex+1)+']爬取到结果：' + execRe);
                     resArray.push({
                         cusNo: $("#txtDeclareFormNo").val(),
                         state: execRe
@@ -230,13 +230,13 @@ function setForm() {
                 } else {
                     let execRe = reResult.exec(data);
                     if (execRe) {
-                        wirteLog('['+dataIndex+1+']爬取到结果：' + execRe);
+                        wirteLog('['+(dataIndex+1)+']爬取到结果：' + execRe);
                         resArray.push({
                             cusNo: $("#txtDeclareFormNo").val(),
                             state: execRe
                         });
                     }else {
-                        wirteLog('['+dataIndex+1+']未爬取到结果');
+                        wirteLog('['+(dataIndex+1)+']未爬取到结果');
                         resArray.push({
                             cusNo: $("#txtDeclareFormNo").val(),
                             state: null
