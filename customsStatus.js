@@ -20,7 +20,8 @@ let dataNum = 8;
 let dataIndex = 0;
 let backUrl = 'http://work.isaacxu.com/yyjkwebapi/api/';
 let resArray = [];
-let waitTime = 15;
+let waitTime = 12;
+let requireData = null;
 let defaultWaitTime = waitTime;
 let isResetViewSate = true;
 function startRobot(time) {
@@ -36,13 +37,19 @@ function startRobot(time) {
                     dataNum: dataNum
                 },
                 success: function (res) {
-                    if (res.length > 0) {
-                        window.setTimeout(c=>realPost(res),waitTime*1000);
+                    if (res) {
+                        $("#totalCrawl").text(parseInt(res.crawled)+parseInt(res.unCrawl));
+                        $("#crawled").text(res.crawled);
+                        $("#unCrawl").text(res.unCrawl);
+                        if(res.data.length > 0){
+                            requireData=res.data;
+                            window.setTimeout(c=>realPost(),waitTime*1000);
+                        }
                     }
                 },
                 error: function () {
                     wirteLog('请求GetNoList出错');
-                    startRobot(time||100);
+                    startRobot(time||1000);
                 }
             })
         } else {
@@ -59,22 +66,22 @@ function startRobot(time) {
             }, waitTime*1000)
         }
     } else {
-        startRobot(time||100);
+        startRobot(time||1000);
     }
 }
 
-function realPost(res) {
+function realPost() {
     resetViewState();
     if(isResetViewSate){
-        wirteLog('开始爬取报关单号：' + res[dataIndex]['CS_NO']);
-        $("#txtDeclareFormNo").val(res[dataIndex]['CS_NO']);
+        wirteLog('开始爬取报关单号：' + requireData[dataIndex]['CS_NO']);
+        $("#txtDeclareFormNo").val(requireData[dataIndex]['CS_NO']);
         var imgUrl = $("#verifyIdentityImage img").attr("src");
         $.ajax({
             url: backUrl + "Cus/GetVcode",
             data: {
                 imgurl: 'http://query.customs.gov.cn/' + imgUrl
             },
-            async:false,
+            async:true,
             type: 'post',
             dataType: 'json',
             beforeSend: function () {
@@ -93,8 +100,7 @@ function realPost(res) {
                         cusNo: $("#txtDeclareFormNo").val(),
                         state: null
                     });
-                    reStart();
-
+                    rungoon();
                 }
             },
             error: function () {
@@ -103,34 +109,41 @@ function realPost(res) {
                     cusNo: $("#txtDeclareFormNo").val(),
                     state: null
                 });
-                reStart();
-            },
-            complete: function () {
-                dataIndex++;
-                if (dataIndex < dataNum) {
-                    wirteLog('等待'+waitTime+'秒');
-                    window.setTimeout(c => realPost(res),waitTime*1000);
-                }
+                rungoon();
             }
         })
     }else{
         wirteLog('等待'+waitTime+'秒');
-        window.setTimeout(c => realPost(res),waitTime*1000);
+        window.setTimeout(c => realPost(),waitTime*1000);
     }
 }
 
 function wirteLog(text) {
-    let ndt = new Date();
-    let msg = ndt.toLocaleDateString() + ' ' + ndt.toLocaleTimeString() + "：" + text + '\r\n';
-    $("#dc_log").append(msg);
-    $("#dc_log")[0].scrollTop = $("#dc_log")[0].scrollHeight;
+    if($("#dc_log").val()&&$("#dc_log").val().length>=5000){
+        $("#dc_log").val("");
+    }else{
+        let ndt = new Date();
+        let msg = ndt.toLocaleDateString() + ' ' + ndt.toLocaleTimeString() + "：" + text + '\r\n';
+        $("#dc_log").val($("#dc_log").val()+msg);
+        $("#dc_log")[0].scrollTop = $("#dc_log")[0].scrollHeight;
+    }
 }
 
 function initElement() {
     $("body").append("<div id='dc_contorl'><div>" +
+        "<div><label>总共：</label><label id='totalCrawl'></label><label>，已爬取：</label><label id='crawled'></label><label>，未爬取：</label><label id='unCrawl'></label></div>" +
         "<div><button id='dc_btn'></button></div>" +
         "<div><textarea id='dc_log'></textarea></div>" +
         "</div>");
+    $("#dc_contorl div").css({
+        "margin-bottom":"10px"
+    });
+    $("#crawled").css({
+        'color':'red'
+    });
+    $("#unCrawl").css({
+        'color':'green'
+    });
     $("#dc_contorl").css({
         width: '450px',
         position: 'absolute',
@@ -149,11 +162,11 @@ function initElement() {
         'click': function () {
             if (state) {
                 state = false;
-                $(this).text(state?'开始':'暂停');
+                $(this).text(state?'暂停':'开始');
                 wirteLog('暂停');
             } else {
                 state = true;
-                $(this).text(state?'开始':'暂停');
+                $(this).text(state?'暂停':'开始');
                 wirteLog('开始');
             }
         }
@@ -225,12 +238,10 @@ function setForm() {
                     } else {
                         if (data.length < 300) {
                             wirteLog(data)
-                        }else {
-                            console.error(data)
                         }
                     }
                 }
-                reStart();
+                rungoon();
             },
             error: function () {
                 wirteLog('提交表单失败');
@@ -238,19 +249,25 @@ function setForm() {
                     cusNo: $("#txtDeclareFormNo").val(),
                     state: null
                 });
-                reStart();
+                rungoon();
             }
         })
     });
 }
 
-function reStart() {
+function rungoon() {
     if (resArray.length === dataNum) {
         saveDataToDb();
+    }else{
+        dataIndex++;
+        if (dataIndex < dataNum) {
+            wirteLog('等待'+waitTime+'秒');
+            window.setTimeout(c => realPost(requireData),waitTime*1000);
+        }
     }
 }
 
-function saveDataToDb() {
+function saveDataToDb(callback) {
     wirteLog('该批次准备入库');
     let saveData = resArray.filter(c => c.state !== null);
     let cusNos = [];
@@ -280,6 +297,7 @@ function saveDataToDb() {
                 wirteLog('一个批次爬网结束');
                 dataIndex=0;
                 resArray=[];
+                requireData=null;
                 startRobot(waitTime*1000);
             }
         })
