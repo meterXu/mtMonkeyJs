@@ -95,7 +95,7 @@ function realPost() {
                         $("#submitBtn").click();
                     }, 1000)
                 } else {
-                    wirteLog('验证码不正确：' + res.code);
+                    wirteLog('['+dataIndex+1+']验证码不正确：' + res.code);
                     resArray.push({
                         cusNo: $("#txtDeclareFormNo").val(),
                         state: null
@@ -104,7 +104,7 @@ function realPost() {
                 }
             },
             error: function () {
-                wirteLog('获取验证码失败');
+                wirteLog('['+dataIndex+1+']获取验证码失败');
                 resArray.push({
                     cusNo: $("#txtDeclareFormNo").val(),
                     state: null
@@ -214,7 +214,7 @@ function resetViewState() {
 }
 
 function setForm() {
-    let reResult = new RegExp('(?<=lblResult" class="color04">).*(?=</)', 'g');
+    let reResult = new RegExp('(?<=lblResult" class="color04">).*(?=</span)', 'g');
     $('#form1').append('<input type="hidden" name="submitBtn" value="查询"/>');
     $('#form1').on('submit', function (e) {
         e.preventDefault(); // prevent native submit
@@ -222,22 +222,31 @@ function setForm() {
             success: function (data) {
                 let execRe = reResult.exec(data);
                 if (execRe) {
-                    wirteLog('爬取到结果：' + execRe);
+                    wirteLog('['+dataIndex+1+']爬取到结果：' + execRe);
                     resArray.push({
                         cusNo: $("#txtDeclareFormNo").val(),
                         state: execRe
                     });
                 } else {
-                    wirteLog('未爬取到结果');
-                    resArray.push({
-                        cusNo: $("#txtDeclareFormNo").val(),
-                        state: null
-                    });
-                    if (data.indexOf('验证码错误') > -1) {
-                        wirteLog('验证码错误')
-                    } else {
-                        if (data.length < 300) {
-                            wirteLog(data)
+                    let execRe = reResult.exec(data);
+                    if (execRe) {
+                        wirteLog('['+dataIndex+1+']爬取到结果：' + execRe);
+                        resArray.push({
+                            cusNo: $("#txtDeclareFormNo").val(),
+                            state: execRe
+                        });
+                    }else {
+                        wirteLog('['+dataIndex+1+']未爬取到结果');
+                        resArray.push({
+                            cusNo: $("#txtDeclareFormNo").val(),
+                            state: null
+                        });
+                        if (data.indexOf('验证码错误') > -1) {
+                            wirteLog('验证码错误')
+                        } else {
+                            if (data.length < 300) {
+                                wirteLog(data)
+                            }
                         }
                     }
                 }
