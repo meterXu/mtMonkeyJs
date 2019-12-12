@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         报关单状态查询
 // @namespace    customs
-// @version      1.2
+// @version      1.3
 // @updateURL    https://tampermonkey.isaacxu.com/customsStatus.js
 // @license      LGPL-3.0
 // @description  报关单状态查询
@@ -20,7 +20,7 @@ let dataNum = 8;
 let dataIndex = 0;
 let backUrl = 'http://work.isaacxu.com/yyjkwebapi/api/';
 let resArray = [];
-let waitTime = 8;
+let waitTime = 0;
 let requireData = null;
 let defaultWaitTime = waitTime;
 let isResetViewSate = true;
@@ -71,8 +71,11 @@ function startRobot(time) {
 }
 
 function realPost() {
-    resetViewState();
+    if(!isResetViewSate){
+        resetViewState();
+    }
     if(isResetViewSate){
+        isResetViewSate=false;
         wirteLog('开始爬取报关单号：' + requireData[dataIndex]['CS_NO']);
         $("#txtDeclareFormNo").val(requireData[dataIndex]['CS_NO']);
         var imgUrl = $("#verifyIdentityImage img").attr("src");
@@ -93,7 +96,7 @@ function realPost() {
                     $("#txtVerifyNumber").val(res.code);
                     window.setTimeout(c => {
                         $("#submitBtn").click();
-                    }, 1000)
+                    }, 0)
                 } else {
                     wirteLog('['+(dataIndex+1)+']验证码不正确：' + res.code);
                     resArray.push({
@@ -182,35 +185,39 @@ function resetViewState() {
             wirteLog('开始重置viewState');
         },
         success: function (data) {
-            let reImg = /(?<=\<img src\=\").*(?=\" align=\"absmiddle\")/g;
-            let reView = new RegExp('(?<=__VIEWSTATE" value=").*(?=" />)', 'g');
-            var reAction = new RegExp('(?<=__EVENTVALIDATION" value=").*(?=" />)', 'g');
-            let execs = reImg.exec(data);
-            let viewExecs = reView.exec(data);
-            let actionExecs = reAction.exec(data);
-            if (execs && viewExecs && actionExecs) {
-                wirteLog('重置viewState成功');
-                isResetViewSate=true;
-                waitTime=defaultWaitTime;
-                let newUrl = execs[0];
-                newUrl = newUrl.replace(/&amp;/g, "&");
-                $("img[align='absmiddle']").attr('src', newUrl);
-                $("#__VIEWSTATE").val(viewExecs[0]);
-                $("#__EVENTVALIDATION").val(actionExecs[0]);
-            } else {
-                wirteLog('重置viewState失败');
-                wirteLog(data);
-                isResetViewSate=false;
-                let reTime = new RegExp('(?<=\\().*(?=秒后)','g');
-                let execsTime = reTime.exec(data);
-                if(execsTime){
-                    waitTime=parseFloat(execsTime[0]);
-                }else{
-                    waitTime=60;
-                }
-            }
+            setViewState(data)
         }
     });
+}
+
+function setViewState(data) {
+    let reImg = /(?<=\<img src\=\").*(?=\" align=\"absmiddle\")/g;
+    let reView = new RegExp('(?<=__VIEWSTATE" value=").*(?=" />)', 'g');
+    var reAction = new RegExp('(?<=__EVENTVALIDATION" value=").*(?=" />)', 'g');
+    let execs = reImg.exec(data);
+    let viewExecs = reView.exec(data);
+    let actionExecs = reAction.exec(data);
+    if (execs && viewExecs && actionExecs) {
+        wirteLog('重置viewState成功');
+        isResetViewSate=true;
+        waitTime=defaultWaitTime;
+        let newUrl = execs[0];
+        newUrl = newUrl.replace(/&amp;/g, "&");
+        $("img[align='absmiddle']").attr('src', newUrl);
+        $("#__VIEWSTATE").val(viewExecs[0]);
+        $("#__EVENTVALIDATION").val(actionExecs[0]);
+    } else {
+        wirteLog('重置viewState失败');
+        wirteLog(data);
+        isResetViewSate=false;
+        let reTime = new RegExp('(?<=\\().*(?=秒后)','g');
+        let execsTime = reTime.exec(data);
+        if(execsTime){
+            waitTime=parseFloat(execsTime[0]);
+        }else{
+            waitTime=60;
+        }
+    }
 }
 
 function setForm() {
@@ -227,6 +234,7 @@ function setForm() {
                         cusNo: $("#txtDeclareFormNo").val(),
                         state: execRe
                     });
+                    setViewState(data)
                 } else {
                     let execRe = reResult.exec(data);
                     if (execRe) {
@@ -235,6 +243,7 @@ function setForm() {
                             cusNo: $("#txtDeclareFormNo").val(),
                             state: execRe
                         });
+                        setViewState(data)
                     }else {
                         wirteLog('['+(dataIndex+1)+']未爬取到结果');
                         resArray.push({
@@ -243,6 +252,7 @@ function setForm() {
                         });
                         if (data.indexOf('验证码错误') > -1) {
                             wirteLog('验证码错误')
+                            setViewState(data)
                         } else {
                             if (data.length < 300) {
                                 wirteLog(data)
