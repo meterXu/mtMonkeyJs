@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         报关单状态查询
 // @namespace    customs
-// @version      1.1
+// @version      1.2
 // @updateURL    https://tampermonkey.isaacxu.com/customsStatus.js
 // @license      LGPL-3.0
 // @description  报关单状态查询
@@ -20,7 +20,7 @@ let dataNum = 8;
 let dataIndex = 0;
 let backUrl = 'http://work.isaacxu.com/yyjkwebapi/api/';
 let resArray = [];
-let waitTime = 12;
+let waitTime = 8;
 let requireData = null;
 let defaultWaitTime = waitTime;
 let isResetViewSate = true;
