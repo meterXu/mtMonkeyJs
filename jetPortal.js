@@ -38,8 +38,8 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-$("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
-// $("head").append('<link href="http://192.168.12.105/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
+// $("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="http://localhost/css/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
     setQuickOperation();
@@ -164,10 +164,10 @@ function setQuickOperation() {
             +'</div>'+
             '<div class="quick-operation">' +
             '<ul class="operation">' +
-            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡明细</a></li>'+
-            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡明细</a></li>'+
-            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡明细</a></li>'+
-            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡明细</a></li>'+
+            '<li><a data-href="/Portal/WorkSpace/BillApply/Index" data-pagecode="Work-bench">工作台</a></li>'+
+            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡</a></li>'+
+            '<li><a data-href="/Portal/WorkList/WorkList/Index" data-pagecode="Portal-WorkList">报工</a></li>'+
+            '<li><a data-href="/Portal/GAManager/GaExpense/Index" data-pagecode="FINANCE_MANAGE">财务</a></li>'+
             '</ul>'
             +'</div>');
         // evnet
