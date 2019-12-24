@@ -38,8 +38,8 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-// $("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
-$("head").append('<link href="http://localhost/css/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
+// $("head").append('<link href="http://localhost/css/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
     setQuickOperation();
