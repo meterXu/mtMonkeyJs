@@ -38,8 +38,8 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-$("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
-// $("head").append('<link href="http://localhost/css/jetPortal.css" rel="stylesheet">');
+// $("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="http://localhost/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
     setQuickOperation();
@@ -168,14 +168,33 @@ function setQuickOperation() {
             '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡</a></li>'+
             '<li><a data-href="/Portal/WorkList/WorkList/Index" data-pagecode="Portal-WorkList">报工</a></li>'+
             '<li><a data-href="/Portal/GAManager/GaExpense/Index" data-pagecode="FINANCE_MANAGE">财务</a></li>'+
+            '<li><a data-href="/Portal/GAManager/GaExpense/Index" data-pagecode="FINANCE_MANAGE">财务</a></li>'+
             '</ul>'
             +'</div>');
         // evnet
         $(".operation a").click(c=>{
+            event.stopPropagation();
             let url = c.target.getAttribute('data-href');
             let pageCode = c.target.getAttribute('data-pagecode');
             let title = c.target.innerText;
             base.tabs.add(pageCode,title,url)
+        })
+        $(".operation li").click(c=>{
+            event.stopPropagation();
+        });
+        $(".quick-operation").click(function(){
+            let operState = $(".operation").attr('disabled',true).attr("class");
+            if(operState === 'operation'){
+                $(".operation").addClass('operation_show');
+                $(".operation").attr('disabled',false)
+            }
+            if(operState === 'operation operation_show'){
+                $(".operation").addClass('operation_hide')
+                setTimeout(c=>{
+                    $(".operation").removeClass('operation_hide operation_show')
+                    $(".operation").attr('disabled',false);
+                },1000)
+            }
         })
     }
 }
