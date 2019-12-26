@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.3
+// @version      1.4.4
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -38,8 +38,8 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-// $("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
-$("head").append('<link href="http://localhost/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
+// $("head").append('<link href="http://localhost/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
     setQuickOperation();
@@ -164,23 +164,21 @@ function setQuickOperation() {
             +'</div>'+
             '<div class="quick-operation">' +
             '<ul class="operation">' +
-            '<li><a data-href="/Portal/WorkSpace/BillApply/Index" data-pagecode="Work-bench">工作台</a></li>'+
-            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡</a></li>'+
-            '<li><a data-href="/Portal/WorkList/WorkList/Index" data-pagecode="Portal-WorkList">报工</a></li>'+
-            '<li><a data-href="/Portal/GAManager/GaExpense/Index" data-pagecode="FINANCE_MANAGE">财务</a></li>'+
-            '<li><a data-href="/Portal/GAManager/GaExpense/Index" data-pagecode="FINANCE_MANAGE">财务</a></li>'+
+            '<li><span data-href="/Portal/WorkSpace/BillApply/Index" data-pagecode="Work-bench">工作台</span></li>'+
+            '<li><span data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡</span></li>'+
+            '<li><span data-href="/Portal/WorkList/WorkList/Index" data-pagecode="Portal-WorkList">报工</span></li>'+
+            '<li><span data-href="/Portal/GAManager/GaExpense/Index" data-pagecode="FINANCE_MANAGE">财务</span></li>'+
+            '<li><span data-href="/Portal/ITMManage/ItmServerApply/Index" data-pagecode="ITM-Manage">IT</span></li>'+
             '</ul>'
             +'</div>');
         // evnet
-        $(".operation a").click(c=>{
+        $(".operation li").click(function(){
             event.stopPropagation();
-            let url = c.target.getAttribute('data-href');
-            let pageCode = c.target.getAttribute('data-pagecode');
-            let title = c.target.innerText;
+            let a = $(this).find('span');
+            let url = a.data('href');
+            let pageCode = a.data('pagecode');
+            let title = a.text();
             base.tabs.add(pageCode,title,url)
-        })
-        $(".operation li").click(c=>{
-            event.stopPropagation();
         });
         $(".quick-operation").click(function(){
             let operState = $(".operation").attr('disabled',true).attr("class");

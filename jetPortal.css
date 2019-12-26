@@ -76,6 +76,8 @@ color: white
 }
 .operation li{
     position: absolute;
+    border: 1px solid #267571;
+    box-sizing: border-box;
     list-style: none;
     width: 50px;
     height: 50px;
@@ -85,6 +87,10 @@ color: white
     color: white;
     transform-origin: 75px 75px;
     cursor: pointer;
+}
+.operation li:hover{
+    background: #fffc9b;
+    color: #9beeff;
 }
 .operation_show{
     transform:translate(-35px,-35px);
