@@ -38,7 +38,7 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-$("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="http://q285oi9uu.bkt.clouddn.com/jetPortal.css" rel="stylesheet">');
 // $("head").append('<link href="http://localhost/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
