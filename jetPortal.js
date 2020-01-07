@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.5
+// @version      1.4.6
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -225,12 +225,14 @@ function getUserInfo() {
                     userInfo.code = res[0].Value;
                 }
                 getTodayWorkTimeBeat();
+                endWorkBeat();
             }
         })
     }
 }
 function getTodayWorkTimeBeat() {
-    if (window.location.href.indexOf("Index/Index/Index") > 1 && userInfo.code) {
+    if (window.location.href.indexOf("Index/Index/Index") > 1 && userInfo.code ) {
+        if(!todayWorkTime.startWorkTime)
         $.ajax({
             url: 'http://portal.dcjet.com.cn:8989/Portal/HrManager/HrManpowerEmployeeWork/LoadIndexData',
             type: 'POST',
@@ -278,23 +280,23 @@ function getTodayWorkTimeBeat() {
                     } else {
                         todayWorkTime.workEndState = 2;//下班未刷卡，或者刷卡机未同步
                     }
-                    window.setTimeout(getTodayWorkTimeBeat, 1000 * 1800);//30分钟查询一次上下班时间
-                } else { // 没有今天的刷卡记录，10分种后再次获取
-                    resetData();
-                    window.setTimeout(getTodayWorkTimeBeat, 1000 * 600);
                 }
-                if (!beatObj.hasOwnProperty("endWorkBeat")) {
-                    endWorkBeat();
-                }
+            },
+            finally:function(){
+                window.setTimeout(getTodayWorkTimeBeat, 1000 * 600);//10分钟查询一次上下班时间
             }
         });
+        else if(getToday() !== localStorage.getItem("p_n_date")){
+            resetData()
+            window.setTimeout(getTodayWorkTimeBeat, 1000 * 600);//10分钟查询一次上下班时间
+        }
     }
 }
 
 function endWorkBeat() {
-    resetData();
     let nowTime = (new Date()).valueOf();
     let _startWorkTime = null;
+    let _endWorkTime = null;
     if (todayWorkTime.workStartState === 0 && localStorage.getItem("p_n_l_state") !== "1" && staticTime.weekday.indexOf(new Date().getDay()) > -1) {
         let noticeCon = '上班时间：' + new Date(ruleWorkTime.startWorkTime).toLocaleString() + "[迟到]";
         sendNotice("警告-今天迟到了！", noticeCon, nowTime);
@@ -307,27 +309,29 @@ function endWorkBeat() {
         localStorage.setItem("p_n_f_state", "1");
         localStorage.setItem('p_n_f_time',(new Date()).toLocaleString())
     }
-    if (todayWorkTime.startWorkTime) {
+    if (todayWorkTime.startWorkTime) { // 正常，迟到，早到
         _startWorkTime = todayWorkTime.startWorkTime;
-    } else {
+    } else if(todayWorkTime.workStartState === 3){ //未刷卡
         _startWorkTime = staticTime.firstStartWork;
     }
-    let _endWorkTime = _startWorkTime + staticTime.siestaTime + staticTime.requireWorkTime + staticTime.machineErrorTime;
-    $("#startTime").text(ruleWorkTime.startWorkTime == null ? "-" : (parseJsonDate(new Date(ruleWorkTime.startWorkTime),'HH:mm:ss')+"["+startWorkStateText(todayWorkTime.workStartState)+"]"));
+    if(_startWorkTime){
+        _endWorkTime = _startWorkTime + staticTime.siestaTime + staticTime.requireWorkTime + staticTime.machineErrorTime;
+    }
+    $("#startTime").text(todayWorkTime.startWorkTime == null ? "-" : (parseJsonDate(new Date(todayWorkTime.startWorkTime),'HH:mm:ss')+"["+startWorkStateText(todayWorkTime.workStartState)+"]"));
     $("#endTime").text(_endWorkTime == null ? "-" : parseJsonDate(new Date(_endWorkTime),'HH:mm:ss'));
-    if (nowTime >= _endWorkTime
+    if (_endWorkTime && nowTime >= _endWorkTime
         && todayWorkTime.workEndState === 2
         && localStorage.getItem("p_n_state") !== "1"
         && staticTime.weekday.indexOf(new Date().getDay()) > -1) {//今天时间到了，下班未刷卡，周一-周五，未通知
         //通知下班
-        let noticeCon = '上班时间为:' + (ruleWorkTime.startWorkTime == null ? "-" : new Date(ruleWorkTime.startWorkTime).toLocaleString()) + "[" + startWorkStateText(todayWorkTime.workStartState) + "]" +
+        let noticeCon = '上班时间为:' + (todayWorkTime.startWorkTime == null ? "-" : new Date(todayWorkTime.startWorkTime).toLocaleString()) + "[" + startWorkStateText(todayWorkTime.workStartState) + "]" +
             '\r\n应下班时间为:' + new Date(_endWorkTime).toLocaleString();
         sendNotice("提醒-今天可以下班啦！", noticeCon, nowTime);
         localStorage.setItem("p_n_date", getToday());
         localStorage.setItem("p_n_state", "1");
         localStorage.setItem('p_n_time',(new Date()).toLocaleString())
     }
-    let id = window.setTimeout(endWorkBeat, 1000 * 30);//下班计算心跳30秒一次
+    let id = window.setTimeout(endWorkBeat, 1000 * 5);//下班计算心跳5秒一次
     beatObj.endWorkBeat = id;
 }
 function startWorkStateText(state) {
@@ -454,18 +458,15 @@ function mAlert(msg) {
     }, 1000);
 }
 function resetData() {
-    let noticeDate = localStorage.getItem("p_n_date");
-    if (noticeDate !== getToday()) {
-        localStorage.setItem("p_n_date", getToday());
-        localStorage.setItem("p_n_state", "0");
-        localStorage.setItem("p_n_l_state", "0");
-        localStorage.setItem("p_n_f_state", "0");
-        staticTime.firstStartWork = new Date(getToday() + " 08:30:00").valueOf();//最早上班时间
-        staticTime.lastStartWork = new Date(getToday() + " 09:30:59").valueOf();//最晚上班时间
-        staticTime.lastEndWork = new Date(getToday() + " 18:00:00");//最晚下班时间
-        todayWorkTime.startWorkTime = null;
-        todayWorkTime.endWorkTime = null;
-        todayWorkTime.workStartState = 3;
-        todayWorkTime.workEndState = 2;
-    }
+    localStorage.setItem("p_n_date", getToday());
+    localStorage.setItem("p_n_state", "0");
+    localStorage.setItem("p_n_l_state", "0");
+    localStorage.setItem("p_n_f_state", "0");
+    staticTime.firstStartWork = new Date(getToday() + " 08:30:00").valueOf();//最早上班时间
+    staticTime.lastStartWork = new Date(getToday() + " 09:30:59").valueOf();//最晚上班时间
+    staticTime.lastEndWork = new Date(getToday() + " 18:00:00");//最晚下班时间
+    todayWorkTime.startWorkTime = null;
+    todayWorkTime.endWorkTime = null;
+    todayWorkTime.workStartState = null;
+    todayWorkTime.workEndState = null;
 }
