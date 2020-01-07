@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.6
+// @version      1.4.7
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -317,8 +317,8 @@ function endWorkBeat() {
     if(_startWorkTime){
         _endWorkTime = _startWorkTime + staticTime.siestaTime + staticTime.requireWorkTime + staticTime.machineErrorTime;
     }
-    $("#startTime").text(todayWorkTime.startWorkTime == null ? "-" : (parseJsonDate(new Date(todayWorkTime.startWorkTime),'HH:mm:ss')+"["+startWorkStateText(todayWorkTime.workStartState)+"]"));
-    $("#endTime").text(_endWorkTime == null ? "-" : parseJsonDate(new Date(_endWorkTime),'HH:mm:ss'));
+    $("#startTime").text(todayWorkTime.startWorkTime == null ? "..." : (parseJsonDate(new Date(todayWorkTime.startWorkTime),'HH:mm:ss')+"["+startWorkStateText(todayWorkTime.workStartState)+"]"));
+    $("#endTime").text(_endWorkTime == null ? "..." : parseJsonDate(new Date(_endWorkTime),'HH:mm:ss'));
     if (_endWorkTime && nowTime >= _endWorkTime
         && todayWorkTime.workEndState === 2
         && localStorage.getItem("p_n_state") !== "1"
@@ -331,7 +331,12 @@ function endWorkBeat() {
         localStorage.setItem("p_n_state", "1");
         localStorage.setItem('p_n_time',(new Date()).toLocaleString())
     }
-    let id = window.setTimeout(endWorkBeat, 1000 * 5);//下班计算心跳5秒一次
+    let id = null
+    if(!todayWorkTime.workStartState){
+        id = window.setTimeout(endWorkBeat, 1000 * 1);//下班计算心跳1秒一次
+    }else{
+        id = window.setTimeout(endWorkBeat, 1000 * 5);//下班计算心跳5秒一次
+    }
     beatObj.endWorkBeat = id;
 }
 function startWorkStateText(state) {
