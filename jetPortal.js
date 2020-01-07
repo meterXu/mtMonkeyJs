@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.4
+// @version      1.4.5
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -420,12 +420,12 @@ function parseJsonDate(dateJson, formatter) {
 }
 function sendNotice(title, msg, tag) {
     if (window.location.href.indexOf('Index/Index/Index') > -1) {
-        window.open(encodeURI("https://app.isaacxu.com/webNotice/notice.html?title=" + title + "&msg=" + msg + "&tag=" + tag + "&forever=1"), "_blank");
+        window.open(encodeURI("https://server.isaacxu.com:4443/webNotice/notice.html?title=" + title + "&msg=" + msg + "&tag=" + tag + "&forever=1"), "_blank");
     }
 }
 function setNoticePermission() {
     if (window.location.href.indexOf('Login.aspx') > -1) {
-        window.open(encodeURI("https://app.isaacxu.com/webNotice/setPermission.html"), "_blank");
+        window.open(encodeURI("https://server.isaacxu.com:4443/webNotice/setPermission.html"), "_blank");
     }
 }
 function mAlert(msg) {
