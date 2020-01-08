@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.7
+// @version      1.4.8
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -38,7 +38,7 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-$("head").append('<link href="http://q285oi9uu.bkt.clouddn.com/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="https://server.isaacxu.com:4443/jetPortal.css" rel="stylesheet">');
 // $("head").append('<link href="http://localhost/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
