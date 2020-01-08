@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.9
+// @version      1.4.10
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -317,7 +317,7 @@ function endWorkBeat() {
     if(_startWorkTime){
         _endWorkTime = _startWorkTime + staticTime.siestaTime + staticTime.requireWorkTime + staticTime.machineErrorTime;
     }
-    $("#startTime").text(todayWorkTime.startWorkTime == null ? "..." : (parseJsonDate(new Date(todayWorkTime.startWorkTime),'HH:mm:ss')+"["+startWorkStateText(todayWorkTime.workStartState)+"]"));
+    $("#startTime").text(todayWorkTime.startWorkTime == null ? "..." : (parseJsonDate(new Date(ruleWorkTime.startWorkTime),'HH:mm:ss')+"["+startWorkStateText(todayWorkTime.workStartState)+"]"));
     $("#endTime").text(_endWorkTime == null ? "..." : parseJsonDate(new Date(_endWorkTime),'HH:mm:ss'));
     if (_endWorkTime && nowTime >= _endWorkTime
         && todayWorkTime.workEndState === 2
