@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.10
+// @version      1.4.11
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -286,7 +286,7 @@ function getTodayWorkTimeBeat() {
                 window.setTimeout(getTodayWorkTimeBeat, 1000 * 600);//10分钟查询一次上下班时间
             }
         });
-        else if(getToday() !== localStorage.getItem("p_n_date")){
+        if(getToday() !== localStorage.getItem("p_n_date")){
             resetData()
             window.setTimeout(getTodayWorkTimeBeat, 1000 * 600);//10分钟查询一次上下班时间
         }
