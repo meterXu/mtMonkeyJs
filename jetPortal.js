@@ -28,7 +28,7 @@ let ruleWorkTime = {
     endWorkTime: null,
 };
 const staticTime = {
-    machineErrorTime: 120000,//机器误差时间
+    machineErrorTime: 60000,//机器误差时间
     siestaTime: 3600000,//午休事件
     requireWorkTime: 27000000,//需要工作时间
     firstStartWork: new Date(getToday() + " 08:30:00").valueOf(),//最早上班时间
