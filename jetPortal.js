@@ -270,11 +270,12 @@ function getTodayWorkTimeBeat() {
                         let endWorkTime = data.rows[0]["EndDate"].replace(/\/Date\(|\)/g, '');
                         endWorkTime = parseInt(endWorkTime);
                         ruleWorkTime.endWorkTime = endWorkTime;
-                        if (endWorkTime - todayWorkTime.startWorkTime - staticTime.siestaTime < staticTime.requireWorkTime) {
-                            todayWorkTime.workEndState = 0;//早退
-                        } else {
-                            todayWorkTime.workEndState = 1;//正常下班
-                        }
+                        // if (endWorkTime - todayWorkTime.startWorkTime - staticTime.siestaTime < staticTime.requireWorkTime) {
+                        //     todayWorkTime.workEndState = 0;//早退
+                        // } else {
+                        //     todayWorkTime.workEndState = 1;//正常下班
+                        // }
+                        todayWorkTime.workEndState = 1;//正常下班
                         todayWorkTime.endWorkTime = endWorkTime;
 
                     } else {
@@ -303,12 +304,12 @@ function endWorkBeat() {
         localStorage.setItem("p_n_l_state", "1");
         localStorage.setItem('p_n_l_time',(new Date()).toLocaleString())
     }
-    if (todayWorkTime.workEndState === 0 && localStorage.getItem("p_n_f_state") !== "1" && staticTime.weekday.indexOf(new Date().getDay()) > -1) {
-        let noticeCon = '下班时间：' + new Date(ruleWorkTime.endWorkTime).toLocaleString() + "[早退]";
-        sendNotice("警告-今天早退了！", noticeCon, nowTime);
-        localStorage.setItem("p_n_f_state", "1");
-        localStorage.setItem('p_n_f_time',(new Date()).toLocaleString())
-    }
+    // if (todayWorkTime.workEndState === 0 && localStorage.getItem("p_n_f_state") !== "1" && staticTime.weekday.indexOf(new Date().getDay()) > -1) {
+    //     let noticeCon = '下班时间：' + new Date(ruleWorkTime.endWorkTime).toLocaleString() + "[早退]";
+    //     sendNotice("警告-今天早退了！", noticeCon, nowTime);
+    //     localStorage.setItem("p_n_f_state", "1");
+    //     localStorage.setItem('p_n_f_time',(new Date()).toLocaleString())
+    // }
     if (todayWorkTime.startWorkTime) { // 正常，迟到，早到
         _startWorkTime = todayWorkTime.startWorkTime;
     } else if(todayWorkTime.workStartState === 3){ //未刷卡
