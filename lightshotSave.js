@@ -47,7 +47,7 @@
         searchImgUrl(code)
         $("#saveImg").on('click',function(){
             let imgbase64 = $(".under-image img").prop('src')
-            let title = $(".image__title.image-info-item>a").text()
+            let title = $(".image__title").text()||$(".image__title a").text()
             saveImg(code,title,imgbase64)
         })
     }
