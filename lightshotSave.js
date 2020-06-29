@@ -67,7 +67,7 @@
 
     function saveImg(code,title,data){
 
-        let user = document.querySelector("#username").innerText
+        let user = document.querySelector("#username").innerText.replace("%username%","-")
 
         $.ajax({
             url:baseUrl+"/exca/saveImg",
