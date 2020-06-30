@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @require      https://code.jquery.com/jquery-2.0.0.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js
-// @version      1.0
+// @version      1.1
 // @description  lightshot base64图片转url，方便Markdown文档内插入图片
 // @author       isaacXu
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
@@ -16,6 +16,7 @@
     'use strict';
     // Your code here...
     const baseUrl = "https://server.isaacxu.com:3001"
+    removeAd();
     $(function(){
         init();
         setSaveBtnEvent();
@@ -23,7 +24,6 @@
 
 
     function init(){
-      removeAd();
       let timerid =  window.setInterval(function(){
             if($(".under-image img").length>0){
                 $(".social").append(`<div class="social__tw my-save-btn" style='padding:0 5px;height:20px;background-color:green;text-align:center;border-radius:4px;margin-top:-5px;cursor:pointer'>
