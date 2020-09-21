@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         捷通portal考勤提醒
 // @namespace    jetPortal
-// @version      1.4.3
+// @version      1.4.13
 // @updateURL    https://tampermonkey.isaacxu.com/jetPortal.js
 // @license      LGPL-3.0
 // @description  我爱上班！！！
@@ -28,7 +28,7 @@ let ruleWorkTime = {
     endWorkTime: null,
 };
 const staticTime = {
-    machineErrorTime: 120000,//机器误差时间
+    machineErrorTime: 60000,//机器误差时间
     siestaTime: 3600000,//午休事件
     requireWorkTime: 27000000,//需要工作时间
     firstStartWork: new Date(getToday() + " 08:30:00").valueOf(),//最早上班时间
@@ -38,8 +38,8 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-$("head").append('<link href="http://7u-css.isaacxu.com/jetPortal.css" rel="stylesheet">');
-// $("head").append('<link href="http://localhost/css/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="https://server.isaacxu.com:4443/tampermonkey/jetPortal.css" rel="stylesheet">');
+// $("head").append('<link href="http://localhost/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();
     setQuickOperation();
@@ -164,18 +164,35 @@ function setQuickOperation() {
             +'</div>'+
             '<div class="quick-operation">' +
             '<ul class="operation">' +
-            '<li><a data-href="/Portal/WorkSpace/BillApply/Index" data-pagecode="Work-bench">工作台</a></li>'+
-            '<li><a data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡</a></li>'+
-            '<li><a data-href="/Portal/WorkList/WorkList/Index" data-pagecode="Portal-WorkList">报工</a></li>'+
-            '<li><a data-href="/Portal/GAManager/GaExpense/Index" data-pagecode="FINANCE_MANAGE">财务</a></li>'+
+            '<li><span data-href="/Portal/WorkSpace/BillApply/Index" data-pagecode="Work-bench">工作台</span></li>'+
+            '<li><span data-href="/Portal/HrManager/HrManpowerEmployeeWork/Index" data-pagecode="HR-ManpowerEmployeeWork">刷卡</span></li>'+
+            '<li><span data-href="/Portal/WorkList/WorkList/Index" data-pagecode="Portal-WorkList">报工</span></li>'+
+            '<li><span data-href="/Portal/GAManager/GaExpense/Index" data-pagecode="FINANCE_MANAGE">财务</span></li>'+
+            '<li><span data-href="/Portal/ITMManage/ItmServerApply/Index" data-pagecode="ITM-Manage">IT</span></li>'+
             '</ul>'
             +'</div>');
         // evnet
-        $(".operation a").click(c=>{
-            let url = c.target.getAttribute('data-href');
-            let pageCode = c.target.getAttribute('data-pagecode');
-            let title = c.target.innerText;
+        $(".operation li").click(function(){
+            event.stopPropagation();
+            let a = $(this).find('span');
+            let url = a.data('href');
+            let pageCode = a.data('pagecode');
+            let title = a.text();
             base.tabs.add(pageCode,title,url)
+        });
+        $(".quick-operation").click(function(){
+            let operState = $(".operation").attr('disabled',true).attr("class");
+            if(operState === 'operation'){
+                $(".operation").addClass('operation_show');
+                $(".operation").attr('disabled',false)
+            }
+            if(operState === 'operation operation_show'){
+                $(".operation").addClass('operation_hide')
+                setTimeout(c=>{
+                    $(".operation").removeClass('operation_hide operation_show')
+                    $(".operation").attr('disabled',false);
+                },1000)
+            }
         })
     }
 }
@@ -208,12 +225,14 @@ function getUserInfo() {
                     userInfo.code = res[0].Value;
                 }
                 getTodayWorkTimeBeat();
+                endWorkBeat();
             }
         })
     }
 }
 function getTodayWorkTimeBeat() {
-    if (window.location.href.indexOf("Index/Index/Index") > 1 && userInfo.code) {
+    if (window.location.href.indexOf("Index/Index/Index") > 1 && userInfo.code ) {
+        if(!todayWorkTime.startWorkTime)
         $.ajax({
             url: 'http://portal.dcjet.com.cn:8989/Portal/HrManager/HrManpowerEmployeeWork/LoadIndexData',
             type: 'POST',
@@ -251,66 +270,74 @@ function getTodayWorkTimeBeat() {
                         let endWorkTime = data.rows[0]["EndDate"].replace(/\/Date\(|\)/g, '');
                         endWorkTime = parseInt(endWorkTime);
                         ruleWorkTime.endWorkTime = endWorkTime;
-                        if (endWorkTime - todayWorkTime.startWorkTime - staticTime.siestaTime < staticTime.requireWorkTime) {
-                            todayWorkTime.workEndState = 0;//早退
-                        } else {
-                            todayWorkTime.workEndState = 1;//正常下班
-                        }
+                        // if (endWorkTime - todayWorkTime.startWorkTime - staticTime.siestaTime < staticTime.requireWorkTime) {
+                        //     todayWorkTime.workEndState = 0;//早退
+                        // } else {
+                        //     todayWorkTime.workEndState = 1;//正常下班
+                        // }
+                        todayWorkTime.workEndState = 1;//正常下班
                         todayWorkTime.endWorkTime = endWorkTime;
 
                     } else {
                         todayWorkTime.workEndState = 2;//下班未刷卡，或者刷卡机未同步
                     }
-                    window.setTimeout(getTodayWorkTimeBeat, 1000 * 1800);//30分钟查询一次上下班时间
-                } else { // 没有今天的刷卡记录，10分种后再次获取
-                    resetData();
-                    window.setTimeout(getTodayWorkTimeBeat, 1000 * 600);
                 }
-                if (!beatObj.hasOwnProperty("endWorkBeat")) {
-                    endWorkBeat();
-                }
+            },
+            finally:function(){
+                window.setTimeout(getTodayWorkTimeBeat, 1000 * 600);//10分钟查询一次上下班时间
             }
         });
+        if(getToday() !== localStorage.getItem("p_n_date")){
+            resetData()
+            window.setTimeout(getTodayWorkTimeBeat, 1000 * 600);//10分钟查询一次上下班时间
+        }
     }
 }
 
 function endWorkBeat() {
-    resetData();
     let nowTime = (new Date()).valueOf();
     let _startWorkTime = null;
+    let _endWorkTime = null;
     if (todayWorkTime.workStartState === 0 && localStorage.getItem("p_n_l_state") !== "1" && staticTime.weekday.indexOf(new Date().getDay()) > -1) {
         let noticeCon = '上班时间：' + new Date(ruleWorkTime.startWorkTime).toLocaleString() + "[迟到]";
         sendNotice("警告-今天迟到了！", noticeCon, nowTime);
         localStorage.setItem("p_n_l_state", "1");
         localStorage.setItem('p_n_l_time',(new Date()).toLocaleString())
     }
-    if (todayWorkTime.workEndState === 0 && localStorage.getItem("p_n_f_state") !== "1" && staticTime.weekday.indexOf(new Date().getDay()) > -1) {
-        let noticeCon = '下班时间：' + new Date(ruleWorkTime.endWorkTime).toLocaleString() + "[早退]";
-        sendNotice("警告-今天早退了！", noticeCon, nowTime);
-        localStorage.setItem("p_n_f_state", "1");
-        localStorage.setItem('p_n_f_time',(new Date()).toLocaleString())
-    }
-    if (todayWorkTime.startWorkTime) {
+    // if (todayWorkTime.workEndState === 0 && localStorage.getItem("p_n_f_state") !== "1" && staticTime.weekday.indexOf(new Date().getDay()) > -1) {
+    //     let noticeCon = '下班时间：' + new Date(ruleWorkTime.endWorkTime).toLocaleString() + "[早退]";
+    //     sendNotice("警告-今天早退了！", noticeCon, nowTime);
+    //     localStorage.setItem("p_n_f_state", "1");
+    //     localStorage.setItem('p_n_f_time',(new Date()).toLocaleString())
+    // }
+    if (todayWorkTime.startWorkTime) { // 正常，迟到，早到
         _startWorkTime = todayWorkTime.startWorkTime;
-    } else {
+    } else if(todayWorkTime.workStartState === 3){ //未刷卡
         _startWorkTime = staticTime.firstStartWork;
     }
-    let _endWorkTime = _startWorkTime + staticTime.siestaTime + staticTime.requireWorkTime + staticTime.machineErrorTime;
-    $("#startTime").text(ruleWorkTime.startWorkTime == null ? "-" : (parseJsonDate(new Date(ruleWorkTime.startWorkTime),'HH:mm:ss')+"["+startWorkStateText(todayWorkTime.workStartState)+"]"));
-    $("#endTime").text(_endWorkTime == null ? "-" : parseJsonDate(new Date(_endWorkTime),'HH:mm:ss'));
-    if (nowTime >= _endWorkTime
+    if(_startWorkTime){
+        _endWorkTime = _startWorkTime + staticTime.siestaTime + staticTime.requireWorkTime + staticTime.machineErrorTime;
+    }
+    $("#startTime").text(todayWorkTime.startWorkTime == null ? "..." : (parseJsonDate(new Date(ruleWorkTime.startWorkTime),'HH:mm:ss')+"["+startWorkStateText(todayWorkTime.workStartState)+"]"));
+    $("#endTime").text(_endWorkTime == null ? "..." : parseJsonDate(new Date(_endWorkTime),'HH:mm:ss'));
+    if (_endWorkTime && nowTime >= _endWorkTime
         && todayWorkTime.workEndState === 2
         && localStorage.getItem("p_n_state") !== "1"
         && staticTime.weekday.indexOf(new Date().getDay()) > -1) {//今天时间到了，下班未刷卡，周一-周五，未通知
         //通知下班
-        let noticeCon = '上班时间为:' + (ruleWorkTime.startWorkTime == null ? "-" : new Date(ruleWorkTime.startWorkTime).toLocaleString()) + "[" + startWorkStateText(todayWorkTime.workStartState) + "]" +
+        let noticeCon = '上班时间为:' + (todayWorkTime.startWorkTime == null ? "-" : new Date(todayWorkTime.startWorkTime).toLocaleString()) + "[" + startWorkStateText(todayWorkTime.workStartState) + "]" +
             '\r\n应下班时间为:' + new Date(_endWorkTime).toLocaleString();
         sendNotice("提醒-今天可以下班啦！", noticeCon, nowTime);
         localStorage.setItem("p_n_date", getToday());
         localStorage.setItem("p_n_state", "1");
         localStorage.setItem('p_n_time',(new Date()).toLocaleString())
     }
-    let id = window.setTimeout(endWorkBeat, 1000 * 30);//下班计算心跳30秒一次
+    let id = null
+    if(!todayWorkTime.workStartState){
+        id = window.setTimeout(endWorkBeat, 1000 * 1);//下班计算心跳1秒一次
+    }else{
+        id = window.setTimeout(endWorkBeat, 1000 * 5);//下班计算心跳5秒一次
+    }
     beatObj.endWorkBeat = id;
 }
 function startWorkStateText(state) {
@@ -403,12 +430,12 @@ function parseJsonDate(dateJson, formatter) {
 }
 function sendNotice(title, msg, tag) {
     if (window.location.href.indexOf('Index/Index/Index') > -1) {
-        window.open(encodeURI("https://app.isaacxu.com/webNotice/notice.html?title=" + title + "&msg=" + msg + "&tag=" + tag + "&forever=1"), "_blank");
+        window.open(encodeURI("https://server.isaacxu.com:4443/webNotice/notice.html?title=" + title + "&msg=" + msg + "&tag=" + tag + "&forever=1"), "_blank");
     }
 }
 function setNoticePermission() {
     if (window.location.href.indexOf('Login.aspx') > -1) {
-        window.open(encodeURI("https://app.isaacxu.com/webNotice/setPermission.html"), "_blank");
+        window.open(encodeURI("https://server.isaacxu.com:4443/webNotice/setPermission.html"), "_blank");
     }
 }
 function mAlert(msg) {
@@ -437,18 +464,15 @@ function mAlert(msg) {
     }, 1000);
 }
 function resetData() {
-    let noticeDate = localStorage.getItem("p_n_date");
-    if (noticeDate !== getToday()) {
-        localStorage.setItem("p_n_date", getToday());
-        localStorage.setItem("p_n_state", "0");
-        localStorage.setItem("p_n_l_state", "0");
-        localStorage.setItem("p_n_f_state", "0");
-        staticTime.firstStartWork = new Date(getToday() + " 08:30:00").valueOf();//最早上班时间
-        staticTime.lastStartWork = new Date(getToday() + " 09:30:59").valueOf();//最晚上班时间
-        staticTime.lastEndWork = new Date(getToday() + " 18:00:00");//最晚下班时间
-        todayWorkTime.startWorkTime = null;
-        todayWorkTime.endWorkTime = null;
-        todayWorkTime.workStartState = 3;
-        todayWorkTime.workEndState = 2;
-    }
+    localStorage.setItem("p_n_date", getToday());
+    localStorage.setItem("p_n_state", "0");
+    localStorage.setItem("p_n_l_state", "0");
+    localStorage.setItem("p_n_f_state", "0");
+    staticTime.firstStartWork = new Date(getToday() + " 08:30:00").valueOf();//最早上班时间
+    staticTime.lastStartWork = new Date(getToday() + " 09:30:59").valueOf();//最晚上班时间
+    staticTime.lastEndWork = new Date(getToday() + " 18:00:00");//最晚下班时间
+    todayWorkTime.startWorkTime = null;
+    todayWorkTime.endWorkTime = null;
+    todayWorkTime.workStartState = null;
+    todayWorkTime.workEndState = null;
 }

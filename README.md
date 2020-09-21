@@ -31,3 +31,7 @@ chrome浏览器安装tampermonkey插件或者直接安装离线版本，地址�
 > [https://unicode-table.com/cn/](https://unicode-table.com/cn/)
 #### 功能
 * 去除unicode-table网广告
+### lightshotSave.js
+> https://prnt.sc/
+功能
+* lightshot base64图片转url，方便Markdown文档内插入图片
