@@ -17,7 +17,7 @@
 $("head").append('<link href="https://server.isaacxu.com:4443/tampermonkey/jetPortal.css" rel="stylesheet">');
 $(function () {
     initSetting()
-    if(window.location.href.pathname.toLowerCase().indexOf('login.jsp')>-1){
+    if(window.location.pathname.toLowerCase().indexOf('login.jsp')>-1){
     const username = GM_getValue("m_p_username")
     const password = GM_getValue("m_p_passwd")
     if(username&&password){
