@@ -3,16 +3,17 @@
     text-align: center;
     height: 24px;
     line-height: 24px;
-    position: absolute;
+    position: fixed;
     right: 50px;
     bottom: 5px;
     cursor: pointer;
     color: #fff;
     background: rgb(77, 80, 82);
-    border: 1px solid rgb(86, 86, 86)
+    border: 1px solid rgb(86, 86, 86);
+    z-index: 999;
 }
 #m_p_setting_dialog{
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     right: 0;
