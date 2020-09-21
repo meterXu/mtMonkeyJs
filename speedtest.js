@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0.4
 // @description  谁用谁知道
-// @author       Meter
+// @author       isaac
 // @match        *://www.speedtest.cn/*
 // @updateURL    https://app.isaacxu.com/tampermonkey/speedtest.js
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js

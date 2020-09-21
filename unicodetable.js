@@ -4,7 +4,7 @@
 // @version      1.0.0
 // @license      LGPL-3.0
 // @description  烦人的广告
-// @author       Meter
+// @author       isaac
 // @include      *://unicode-table.com*
 // @updateURL    https://tampermonkey.isaacxu.com/unicodetable.js
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js

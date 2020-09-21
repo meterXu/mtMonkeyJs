@@ -4,7 +4,7 @@
 // @version      1.0.3
 // @license      LGPL-3.0
 // @description  获取信用中国网统一社会信用代码
-// @author       Meter
+// @author       isaac
 // @updateURL    https://tampermonkey.isaacxu.com/creditCode.js
 // @match        https://www.creditchina.gov.cn/xinyongfuwu/tongyishehuixinyongdaimachaxunzhuanlan/shehuixinyongdaimachaxun/index.html
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js

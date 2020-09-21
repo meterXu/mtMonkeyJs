@@ -6,7 +6,7 @@
 // @license      LGPL-3.0
 // @description  我爱上班！！！
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
-// @author       Meter
+// @author       isaac
 // @match        http://portal.dcjet.com.cn:8989/Portal/Index/Index/Index
 // @match        http://portal.dcjet.com.cn:8989/Login.aspx
 // @match        http://portal.dcjet.com.cn:8989/Login.aspx?logout=1

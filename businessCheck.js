@@ -4,7 +4,7 @@
 // @version      1.0.0
 // @license      LGPL-3.0
 // @description  获取企查查网统一社会信用代码
-// @author       Meter
+// @author       isaac
 // @include      *://www.qichacha.com/search*
 // @include      *://www.qichacha.com/firm*
 // @updateURL    https://tampermonkey.isaacxu.com/businessCheck.js

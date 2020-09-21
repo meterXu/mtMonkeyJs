@@ -6,7 +6,7 @@
 // @license      LGPL-3.0
 // @description  报关单状态查询
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
-// @author       Meter
+// @author       isaac
 // @match        http://query.customs.gov.cn/HYW2007DataQuery/FormStatusQuery.aspx
 // @require      https://code.jquery.com/jquery-2.0.0.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js

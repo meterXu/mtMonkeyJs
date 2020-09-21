@@ -4,7 +4,7 @@
 // @version      1.0.0
 // @license      LGPL-3.0
 // @description  获取天眼查网统一社会信用代码
-// @author       Meter
+// @author       isaac
 // @include      *://www.tianyancha.com/search*
 // @include      *://www.tianyancha.com/company/*
 // @updateURL    https://tampermonkey.isaacxu.com/skyeye.js
