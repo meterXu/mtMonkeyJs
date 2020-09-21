@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name         DomPortal自动登录
-// @namespace    dpark-domportal
+// @name         HRM自动登录
+// @namespace    dpark-hrm-ap
 // @version      1.0.1
-// @description  DomPortal自动登录
+// @description  HRM自动登录
 // @author       isaac
-// @match        *pmo.dpark.com.cn*
-// @match        *pmo.dpark.com.cn/DomPortal/Content/_mj_ui.nsf*
-// @updateURL    https://app.isaacxu.com/tampermonkey/dpark_domportal.js
+// @match        *hrm-ap/PlatinumHRM-ESS/webpages/homepage.aspx*
+// @match        *http://hrm-ap/PlatinumHRM-ESS/logon.aspx*
+// @updateURL    https://app.isaacxu.com/tampermonkey/dpark_hrm.js
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
 // @grant        GM_setValue
@@ -16,13 +16,13 @@
 $("head").append('<link href="https://server.isaacxu.com:4443/tampermonkey/jetPortal.css" rel="stylesheet">');
 $(function () {
     initSetting()
-    if(window.location.href==="http://pmo.dpark.com.cn/"){
+    if(window.location.pathname.toLowerCase().indexOf('logon.aspx')>-1){
     const username = GM_getValue("m_p_username")
     const password = GM_getValue("m_p_passwd")
     if(username&&password){
-        $("input[name='Username']").val(username)
-        $("input[name='Password']").val(password)
-        $("img[src*='submit.png']").parent().click()
+        $("#ctl00_mainContent_txtUsername").val(username)
+        $("#txtPasswordFront").val(password)
+        $("#ctl00_mainContent_btnLogon").click()
     }
     }
 })
