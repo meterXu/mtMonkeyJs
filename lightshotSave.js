@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @require      https://code.jquery.com/jquery-2.0.0.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js
-// @version      1.1
+// @version      1.2
 // @description  lightshot base64图片转url，方便Markdown文档内插入图片
 // @author       isaacXu
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
@@ -15,7 +15,7 @@
 (function() {
     'use strict';
     // Your code here...
-    const baseUrl = "https://server.isaacxu.com:3001"
+    const baseUrl = "https://img.isaacxu.com"
     removeAd();
     $(function(){
         init();
