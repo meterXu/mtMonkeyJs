@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HRM自动登录
 // @namespace    dpark-hrm-ap
-// @version      1.0.1
+// @version      1.0.2
 // @description  HRM自动登录
 // @author       isaac
 // @match        *hrm-ap/PlatinumHRM-ESS/webpages/homepage.aspx*
@@ -20,6 +20,7 @@ $(function () {
     const username = GM_getValue("m_p_username")
     const password = GM_getValue("m_p_passwd")
     if(username&&password){
+        $("#ctl00_mainContent_domainSelect").val("SIPSD.local")
         $("#ctl00_mainContent_txtUsername").val(username)
         $("#txtPasswordFront").val(password)
         $("#ctl00_mainContent_btnLogon").click()
