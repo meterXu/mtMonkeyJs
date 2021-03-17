@@ -15,7 +15,7 @@
 (function() {
     'use strict';
     // Your code here...
-    const baseUrl = "https://img.isaacxu.com"
+    const baseUrl = "https://server.isaacxu.com:3001"
     removeAd();
     $(function(){
         init();
