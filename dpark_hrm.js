@@ -6,14 +6,14 @@
 // @author       isaac
 // @match        *hrm-ap/PlatinumHRM-ESS/webpages/homepage.aspx*
 // @match        *http://hrm-ap/PlatinumHRM-ESS/logon.aspx*
-// @updateURL    https://app.isaacxu.com/tampermonkey/dpark_hrm.js
+// @updateURL    https://app.xdo.icu/tampermonkey/dpark_hrm.js
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
 // @grant        GM_setValue
 // @grant        GM_getValue
 // ==/UserScript==
 
-$("head").append('<link href="https://server.isaacxu.com:4443/tampermonkey/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="https://app.xdo.icu/tampermonkey/jetPortal.css" rel="stylesheet">');
 $(function () {
     initSetting()
     if(window.location.pathname.toLowerCase().indexOf('logon.aspx')>-1){

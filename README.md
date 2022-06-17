@@ -6,7 +6,7 @@
 ## 脚本安装
 
 1. 下载插件离线包
-地址：[https://app.isaacxu.com/tampermonkey/Tampermonkey.zip](https://app.isaacxu.com/tampermonkey/Tampermonkey.zip)。
+地址：[https://app.xdo.icu/tampermonkey/Tampermonkey.zip](https://app.xdo.icu/tampermonkey/Tampermonkey.zip)
 
 2. 安装插件
 * 解压压缩包Tampermonkey.zip

@@ -7,14 +7,14 @@
 // @match        *fw.dpark.com.cn/login/Login.jsp*
 // @match        *fw.dpark.com.cn/wui/theme/ecology8/page/login.jsp*
 // @match        *fw.dpark.com.cn/wui/main.jsp*
-// @updateURL    https://app.isaacxu.com/tampermonkey/dpark_fw.js
+// @updateURL    https://app.xdo.icu/tampermonkey/dpark_fw.js
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
 // @grant        GM_setValue
 // @grant        GM_getValue
 // ==/UserScript==
 
-$("head").append('<link href="https://server.isaacxu.com:4443/tampermonkey/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="https://app.xdo.icu/tampermonkey/jetPortal.css" rel="stylesheet">');
 $(function () {
     initSetting()
     if(window.location.pathname.toLowerCase().indexOf('login.jsp')>-1){
