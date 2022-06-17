@@ -1,6 +1,6 @@
 def gitUrl = "https://github.com/meterXu/mtMonkeyJs.git"
 def branch = "master"
-def credentialsId = "github"
+def credentialsId = "github_user_pwd"
 def rootPath= "./tampermonkey"
 def appName = "tampermonkey"
 def bakPath = "/home/jenkins_bak"
