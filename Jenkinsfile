@@ -2,7 +2,7 @@ def gitUrl = "git@github.com:meterXu/mtMonkeyJs.git"
 def branch = "master"
 def credentialsId = "github_sshKey"
 def rootPath= "./"
-def appName = "mtMonkeyJs"
+def appName = "tampermonkey"
 def bakPath = "/home/jenkins_bak"
 def putPath = "/home/jenkins_put"
 def publishPath= "/home/html/tampermonkey"
@@ -35,7 +35,7 @@ pipeline {
                          }
                          stage ('启动') {
                             sshCommand remote: remote,command: "rm -rf ${publishPath}"
-                            sshCommand remote: remote,command: "mv ${putPath}/${appName} ${publishPath}"
+                            sshCommand remote: remote,command: "mv ${putPath}/${appName}/* ${publishPath}"
                          }
                     }
                 }
