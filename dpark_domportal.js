@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DomPortal自动登录
 // @namespace    dpark-domportal
-// @version      1.0.2
+// @version      1.0.3
 // @description  DomPortal自动登录
 // @author       isaac
 // @match        *pmo.dpark.com.cn*
