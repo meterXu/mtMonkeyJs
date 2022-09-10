@@ -5,7 +5,7 @@
 // @description  DomPortal自动登录
 // @author       isaac
 // @match        *pmo.dpark.com.cn*
-// @match        *pmo.dpark.com.cn/DomPortal/Content/_mj_ui.nsf*
+// @match        *pmo.dpark.com.cn/DomPortal/**
 // @updateURL    https://app.xdo.icu/tampermonkey/dpark_domportal.js
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @supportURL   https://github.com/meterXu/mtMonkeyJs
@@ -24,10 +24,13 @@ $(function () {
         $("input[name='Password']").val(password)
     }
     }
-    window.setInterval(()=>{
-        $(".flatpickr-disabled").forEach(c=>{
-            debugger
-        })
+
+    setInterval(()=>{
+        let disabledList = document.querySelectorAll('.flatpickr-disabled')
+
+        for(let i=0;i<disabledList.length;i++){
+            disabledList[i].classList.remove('flatpickr-disabled')
+        }
     },1000)
 })
 
