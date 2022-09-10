@@ -22,9 +22,13 @@ $(function () {
     if(username&&password){
         $("input[name='Username']").val(username)
         $("input[name='Password']").val(password)
-        $("img[src*='submit.png']").parent().click()
     }
     }
+    window.setInterval(()=>{
+        $(".flatpickr-disabled").forEach(c=>{
+            debugger
+        })
+    },1000)
 })
 
 function initSetting(){
