@@ -23,7 +23,6 @@ $(function () {
     if(username&&password){
         $("#loginid").val(username)
         $("#userpassword").val(password)
-        $("#login").click()
     }
     }
 })

@@ -23,7 +23,6 @@ $(function () {
         $("#ctl00_mainContent_domainSelect").val("SIPSD.local")
         $("#ctl00_mainContent_txtUsername").val(username)
         $("#txtPasswordFront").val(password)
-        $("#ctl00_mainContent_btnLogon").click()
     }
     }
 })
