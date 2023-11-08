@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         苏大刷题
 // @namespace    https://cj1060-kfkc.webtrn.cn
-// @version      0.3
+// @version      0.4
 // @description  刷题
 // @author       isaac
 // @match        https://cj1060-kfkc.webtrn.cn/learnspace/learn/learn/templatetwo/index.action*
@@ -63,7 +63,7 @@
         }
         if(res){
             if(top.nowLearnId){
-                res.splice(res.findIndex(c=>c.videoId===top.nowLearnId))
+                res.splice(res.findIndex(c=>c.videoId===top.nowLearnId),1)
             }
             return res
         }else{
