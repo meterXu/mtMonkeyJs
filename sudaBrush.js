@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         苏大刷题
 // @namespace    https://cj1060-kfkc.webtrn.cn
-// @version      0.1
+// @version      0.2
 // @description  刷题
 // @author       isaac
 // @match        https://cj1060-kfkc.webtrn.cn/learnspace/learn/learn/templatetwo/index.action*
@@ -34,8 +34,8 @@
         let helper_page_close_btn = learnHelper$("#helper-page .shut-btn")
         let jwdisplayIcon_opacity = mainFrame$('.jwdisplayIcon').css('opacity')
         let button_play = mainFrame$('.jwdisplayIcon #container_display_button_play')
-        let layer_dialog = mainFrame$(".layui-layer-dialog")
-        let layer_dialog_btn = mainFrame$(".layui-layer-dialog .layui-layer-btn0")
+        let layer_dialog = top.$(".layui-layer-dialog")
+        let layer_dialog_btn = top.$(".layui-layer-dialog .layui-layer-btn0")
         if(helper_page.length>0){
             helper_page_close_btn.click()
         }
