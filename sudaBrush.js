@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         苏大刷题
 // @namespace    https://cj1060-kfkc.webtrn.cn
-// @version      0.2
+// @version      0.3
 // @description  刷题
 // @author       isaac
 // @match        https://cj1060-kfkc.webtrn.cn/learnspace/learn/learn/templatetwo/index.action*
@@ -19,9 +19,10 @@
                if(checkLearnCompleteNow()){
                    learnNextVideo()
                }
-               watch()
-           }catch (e){
+           } catch (e){
                console.error(e)
+           } finally {
+               watch()
            }
         },1000)
     }
