@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         苏大刷题
 // @namespace    https://cj1060-kfkc.webtrn.cn
-// @version      0.5
+// @version      0.6
 // @description  刷题
 // @author       isaac
 // @match        https://cj1060-kfkc.webtrn.cn/learnspace/learn/learn/templatetwo/index.action*
@@ -22,7 +22,9 @@
            } catch (e){
                console.error(e)
            } finally {
-               watch()
+               if(!top.learnComplete){
+                   watch()
+               }
            }
         },1000)
     }
@@ -81,7 +83,8 @@
             const mainCont$=top.document.getElementById("mainCont").contentWindow.$
             mainCont$('#s_point_'+top.nowLearnId).click()
         }else{
-            console.log('已全部学完')
+            top.layer.alert('视频已全部学完！')
+            top.learnComplete = true
         }
     }
 
