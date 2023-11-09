@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         苏大刷题
 // @namespace    https://cj1060-kfkc.webtrn.cn
-// @version      0.4
+// @version      0.5
 // @description  刷题
 // @author       isaac
 // @match        https://cj1060-kfkc.webtrn.cn/learnspace/learn/learn/templatetwo/index.action*
@@ -61,14 +61,10 @@
                 title: mainCont$(learnList[i]).attr('title')
             })
         }
-        if(res){
-            if(top.nowLearnId){
-                res.splice(res.findIndex(c=>c.videoId===top.nowLearnId),1)
-            }
-            return res
-        }else{
-            return null
+        if(top.nowLearnId&&res.findIndex(c=>c.videoId===top.nowLearnId)>-1){
+            res.splice(res.findIndex(c=>c.videoId===top.nowLearnId),1)
         }
+        return res
     }
 
     function checkLearnCompleteNow(){
@@ -80,7 +76,7 @@
 
     function learnNextVideo(){
         let learnList = getUnLearnList()
-        if(learnList){
+        if(learnList.length>0){
             top.nowLearnId = learnList[0].videoId
             const mainCont$=top.document.getElementById("mainCont").contentWindow.$
             mainCont$('#s_point_'+top.nowLearnId).click()
