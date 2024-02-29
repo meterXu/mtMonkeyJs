@@ -6,13 +6,11 @@
 ## 脚本安装
 
 1. 下载插件离线包
-地址：[https://app.xdo.icu/tampermonkey/Tampermonkey.zip](https://app.xdo.icu/tampermonkey/Tampermonkey.zip)
+地址：[https://app.xdo.icu/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx](https://app.xdo.icu/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx)
 
 2. 安装插件
-* 解压压缩包Tampermonkey.zip
-* 打开chrome插件程序页面
 
-点击chrome右侧更多按钮
+点击chrome浏览器右上角的“...”
 
 ![更多按钮](img/1.png)
 
@@ -20,17 +18,21 @@
 
 ![扩展程序](img/2.png)
 
-点击”加载已解压的扩展程序“
+进入扩展程序主页面
 
-![加载扩展程序](img/3.png)
+![扩展程序主页面](img/20240229165450.jpg)
 
-插件加载完成后可刷新这个页面，若没有启用，可以手动启用
+拖动第一步下载下来的crx文件，拖动至插件主界面
 
-![启用扩展程序](img/4.png)
+![拖动至插件主界面](img/20240229164955.jpg)
+
+拖动完成后，浏览器会打开插件主页面，我们先把这个页面关掉，还是进入插件主界面，进行下一步操作。
 
 3. 导入脚本
 
-在浏览器右上角”tampermonkey“的图标，在弹出菜单上点击”管理面板“按钮
+安装成功后，在浏览器右上角会出现该插件的图标，点击该图标，在弹出菜单上点击”管理面板“按钮
+
+![管理面板](img/20240229165755.jpg)
 
 ![管理面板](img/5.png)
 
@@ -49,3 +51,7 @@
 切换到tampermonkey管理面板的”已安装脚本“标签，刷新页面，查看脚本是否已经安装成功
 
 ![粘贴地址](img/9.png)
+
+4. 验证
+打开你要应用插件的网站，网站打开后，如果插件运行了，浏览器右上角其图标会显示如下：
+![验证](img/20240229170045.jpg)
