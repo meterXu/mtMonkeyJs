@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         苏大刷题
 // @namespace    https://cj1060-kfkc.webtrn.cn
-// @version      0.7
+// @version      0.8
 // @description  刷题
 // @author       isaac
 // @match        https://cj1060-kfkc.webtrn.cn/learnspace/learn/learn/templatetwo/index.action*
@@ -31,26 +31,25 @@
 
 
     function closeDialog(){
-        try{
-            const learnHelper$=top.document.getElementById("learnHelperIframe").contentWindow.$
-            let helper_page = learnHelper$("#helper-page")
-            let helper_page_close_btn = learnHelper$("#helper-page .shut-btn")
-            const mainFrame$=top.document.getElementById("mainCont").contentWindow.document.getElementById("mainFrame").contentWindow.$
+        const learnHelper$=top.document.getElementById("learnHelperIframe").contentWindow.$
+        let helper_page = learnHelper$("#helper-page")
+        let helper_page_close_btn = learnHelper$("#helper-page .shut-btn")
+        let layer_dialog = top.$(".layui-layer-dialog")
+        let layer_dialog_btn = top.$(".layui-layer-dialog .layui-layer-btn0")
+        if(helper_page.length>0){
+            helper_page_close_btn.click()
+        }
+        if(layer_dialog.length>0){
+            layer_dialog_btn.click()
+        }
+        const mainFrame=top.document.getElementById("mainCont").contentWindow.document.getElementById("mainFrame")
+        if(mainFrame&&mainFrame.contentWindow){
+            const mainFrame$ = mainFrame.contentWindow.$
             let jwdisplayIcon_opacity = mainFrame$('.jwdisplayIcon').css('opacity')
             let button_play = mainFrame$('.jwdisplayIcon #container_display_button_play')
-            let layer_dialog = top.$(".layui-layer-dialog")
-            let layer_dialog_btn = top.$(".layui-layer-dialog .layui-layer-btn0")
-            if(helper_page.length>0){
-                helper_page_close_btn.click()
-            }
-            if(layer_dialog.length>0){
-                layer_dialog_btn.click()
-            }
             if(button_play.length>0&&jwdisplayIcon_opacity==='1'){
                 button_play.click()
             }
-        }catch (err){
-         console.warn(err)
         }
     }
 
