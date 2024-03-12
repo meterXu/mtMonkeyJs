@@ -5,7 +5,7 @@
 // @description  刷题
 // @author       isaac
 // @match        https://cj1060-kfkc.webtrn.cn/learnspace/learn/learn/*
-// @updateURL    https://app.xdo.icu/tampermonkey/sudaBrush.js
+// @updateURL    https://server.isaacxu.com:4443/tampermonkey/sudaBrush.js
 // @grant        none
 // ==/UserScript==
 
