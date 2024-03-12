@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         苏大刷题
 // @namespace    https://cj1060-kfkc.webtrn.cn
-// @version      0.8
+// @version      0.9
 // @description  刷题
 // @author       isaac
-// @match        https://cj1060-kfkc.webtrn.cn/learnspace/learn/learn/templatetwo/index.action*
+// @match        https://cj1060-kfkc.webtrn.cn/learnspace/learn/learn/*
 // @updateURL    https://app.xdo.icu/tampermonkey/sudaBrush.js
 // @grant        none
 // ==/UserScript==
@@ -75,10 +75,11 @@
         const mainFrame$=top.document.getElementById("mainCont").contentWindow.document.getElementById("mainFrame").contentWindow.$
         let jwdisplayIcon_opacity = mainFrame$('.jwdisplayIcon').css('opacity')
         let button_replay = mainFrame$('.jwdisplayIcon #container_display_button_replay')
+        let button_pause = mainFrame$('.prism-big-play-btn.pause')
         if(jwdisplayIcon_opacity){
             return jwdisplayIcon_opacity==='1'&&button_replay.length===1
-        }else{
-            return true
+        }else {
+            return button_pause.length !== 0;
         }
     }
 
