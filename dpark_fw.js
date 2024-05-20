@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         泛微自动登录
 // @namespace    fw.dpark.com.cn
 // @version      1.0.1

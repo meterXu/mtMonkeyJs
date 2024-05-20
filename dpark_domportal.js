@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         DomPortal自动登录
 // @namespace    dpark-domportal
 // @version      1.0.3

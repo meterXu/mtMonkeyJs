@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         信用中国-统一社会信用代码
 // @namespace    http://www.creditchina.gov.cn
 // @version      1.0.3

@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         unicode-table去广告
 // @namespace    unicode-table
 // @version      1.0.0

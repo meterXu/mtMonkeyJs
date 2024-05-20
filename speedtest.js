@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         测速网去广告
 // @namespace    http://tampermonkey.net/
 // @version      1.0.4

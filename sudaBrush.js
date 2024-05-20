@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         苏大刷题
 // @namespace    https://cj1060-kfkc.webtrn.cn
 // @version      0.9

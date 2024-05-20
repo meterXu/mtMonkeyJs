@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         学习强国答题辅助工具
 // @namespace    http://tampermonkey.net/
 // @version      0.6.2

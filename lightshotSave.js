@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name         lightshot截图存储
 // @namespace    http://tampermonkey.net/
 // @require      https://code.jquery.com/jquery-2.0.0.min.js
