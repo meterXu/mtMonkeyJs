@@ -6,7 +6,7 @@
 ## 脚本安装
 
 1. 下载插件离线包
-地址：[https://server.isaacxu.com:4443/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx](https://app.xdo.icu/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx)
+地址：[https://server.isaacxu.com:4443/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx](https://server.isaacxu.com:4443/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx)
 
 2. 安装插件
 
