@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         苏州大学成教在线教学平台
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.1
 // @description  苏州大学成教在线，自动播放下一个，弹窗屏蔽，可做题目（不保证100分）
 // @author       xiajie,isaac
 // @match        https://cj1060-kfkc.webtrn.cn/*
 // @icon         http://webtrn.cn/favicon.ico
 // @grant        none
 // @license      GPL
-// @downloadURL https://update.greasyfork.org/scripts/477074/%E8%8B%8F%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%88%90%E6%95%99%E5%9C%A8%E7%BA%BF%E6%95%99%E5%AD%A6%E5%B9%B3%E5%8F%B0.user.js
-// @updateURL https://update.greasyfork.org/scripts/477074/%E8%8B%8F%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%88%90%E6%95%99%E5%9C%A8%E7%BA%BF%E6%95%99%E5%AD%A6%E5%B9%B3%E5%8F%B0.meta.js
+// @downloadURL https://mtmonkeyjs.netlify.app/src/sudaxuexi.js
+// @updateURL https://mtmonkeyjs.netlify.app/src/sudaxuexi.js
 // ==/UserScript==
 
 (function() {
