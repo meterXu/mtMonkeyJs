@@ -1,0 +1,267 @@
+.isaac_table {
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+.isaac_table th, .isaac_table td {
+    border: 1px solid #ddd;
+    padding: 4px 10px;
+    padding-right: 0;
+    overflow: hidden;
+}
+
+.isaac_table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    line-height: 18px;
+    height: auto;
+    text-align: center;
+    font-weight: bold;
+    color: #666;
+    font-size: 12px;
+}
+
+.isaac_table td a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.isaac_table .isaac_chk {
+    width: 14px;
+    height: 14px;
+    background-color: #fff;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.isaac_table .isaac_number {
+    width: 20px;
+}
+
+.isaac_table tbody {
+    background: white;
+    font-family: "Microsoft Yahei";
+    font-size: 12px;
+}
+
+.isaac_table tbody tr:hover td {
+    background-color: #d9edf7;
+    cursor: pointer;
+}
+
+/*toolbar*/
+.isaac_operate {
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #d6d6d6;
+    padding-bottom: 5px;
+}
+
+.isaac_operate a {
+    display: inline-block;
+    font-size: 14px;
+    padding: 4px 10px 4px 5px;
+    text-decoration: none;
+    color: #337ab7;
+}
+
+.isaac_operate a:active {
+    color: red;
+}
+/*page*/
+.isaac_page {
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #f5f5f5;
+    overflow: hidden;
+    font-size: 12px;
+    font-family: "Microsoft Yahei";
+}
+
+.isaac_page_left {
+    float: left;
+    color: #949495;
+    line-height: 36px;
+}
+.isaac_page_right{
+    float: right;
+}
+
+.isaac_selection {
+    margin-left: 8px;
+    -moz-min-width: 125px;
+    -ms-min-width: 125px;
+    -o-min-width: 125px;
+    -webkit-min-width: 125px;
+    min-width: 125px;
+}
+
+.isaac_selection_select {
+    position: relative;
+    top: -2px;
+    min-width: 115px;
+    vertical-align: middle;
+    padding: 4px;
+    margin: 1px 0 0 5px;
+    height: 26px;
+    font-size: 13px;
+    display: inline-block;
+    color: #808080;
+    border: 1px solid #ccc;
+    font-family: "Microsoft Yahei";
+    font-size: 13px;
+}
+
+.isaac_refresh {
+    width: 20px;
+    height: 20px;
+    background: url('../imgs/view_refresh.png') no-repeat center;
+    float: left;
+    margin-top: 8px;
+    margin-left: 8px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #dddddd;
+}
+
+.loadDiv{
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+}
+.loading{
+    width: 20px;
+    height: 20px;
+    background: url('../imgs/loading.gif') no-repeat center;
+    display: inline-block;
+    margin-right: 2px;
+    position: relative;
+    top: 6px;
+}
+
+.isaac_refresh:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.isaac_pagination {
+    float: right;
+    margin-top: 3px;
+}
+
+.isaac_pagination ul {
+    padding: 0;
+    margin: 0;
+}
+.isaac_pagination ul:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+
+.isaac_pagination ul li {
+    display: inline;
+    float: left;
+    list-style: none;
+}
+
+.isaac_pagination ul li a {
+    text-decoration: none;
+    padding: 4px 10px;
+    line-height: 20px;
+    float: left;
+    border: 1px solid #ddd;
+    border-left: none;
+    background-color: #fff;
+    color: #337ab7;
+    cursor: pointer;
+}
+.isaac_pagination ul li.isaac_li_first a {
+    border-left: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+}
+.isaac_pagination ul li.isaac_li_last a {
+    border-radius: 0 4px 4px 0
+}
+
+.isaac_pagination_active a {
+    background-color: #f5f5f5 !important;
+    color: #999 !important;
+    cursor: default;
+}
+/*icon*/
+.icon {
+    width: 14px;
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-right: 5px;
+    line-height: 14px;
+    height: 14px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: 14px 14px;
+    background-image: url(../imgs/icons-white.png);
+}
+
+.icon-plus {
+    background-position: -408px -96px;
+}
+
+.icon-edit {
+    background-position: -96px -72px;
+}
+
+.icon-trash {
+    background-position: -456px 0;
+}
+
+.icon-export {
+    background-position: -336px -96px;
+}
+
+.icon-print {
+    background-position: -96px -48px;
+}
+.icon-view {
+    background-position: -95px -120px;
+}
+.icon-book{
+    background-position:-49px -49px
+}
+/*拖动单元格*/
+.isaac_layout {
+    position: absolute;
+    z-index: 9998;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: e-resize;
+}
+
+.isaac_verticalLine {
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    left: 20px;
+    z-index: 9999;
+    border-left: 1px #006dcc dotted;
+}
+
+.isaac_lineContent {
+    position: absolute;
+    top: 60px;
+    left: 2px;
+    height: 20px;
+    line-height: 20px;
+    -moz-min-width: 20px;
+    -ms-min-width: 20px;
+    -o-min-width: 20px;
+    -webkit-min-width: 20px;
+    min-width: 20px;
+    font-weight: normal;
+    color: white;
+    padding: 0 4px;
+    background: #006dcc;
+    border-radius: 4px;
+    white-space: nowrap;
+}

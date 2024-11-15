@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
     <title>mtMonkeyJs</title>
-    <link rel="stylesheet" href="https://server.isaacxu.com:4443/isaacTable/src/css/isaac.table.css">
+    <link rel="stylesheet" href="./css/isaac.table.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
     <style>
         html{
@@ -75,13 +75,13 @@
             background: red;
         }
     </style>
-    <script type="text/javascript" src="https://server.isaacxu.com:4443/isaacTable/src/js/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="https://server.isaacxu.com:4443/isaacTable/src/js/isaac.table.js"></script>
+    <script type="text/javascript" src="./lib/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="./lib/isaac.table.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <script src="https://unpkg.com/popper.js@^1"></script>
     <script src="https://unpkg.com/tooltip.js@^1"></script>
     <script type="text/javascript">
-        let baseurl = "https://server.isaacxu.com:4443/tampermonkey/";
+        let baseurl = window.location.href;
         let option={
             multipleSelect: true,
             checkBox:false,
@@ -96,14 +96,14 @@
             ]],
             data:{
                 "rows":[
-                    {"id":1,"name":"portal考勤提醒","url":baseurl+"jetPortal.js"},
-                    {"id":2,"name":"测速网去广告","url":baseurl+"speedtest.js"},
-                    {"id":3,"name":"unicode-table去广告","url":baseurl+"unicodetable.js"},
-                    {"id":4,"name":"markdown文档插图解决方案","url":baseurl+"lightshotSave.js"},
-                    {"id":5,"name":"泛微自动登录","url":baseurl+"dpark_fw.js"},
-                    {"id":6,"name":"DomPortal自动登录","url":baseurl+"dpark_domportal.js"},
-                    {"id":7,"name":"HRM自动登录","url":baseurl+"dpark_hrm.js"},
-                    {"id":8,"name":"我爱苏大学习","url":baseurl+"sudaBrush.js"}
+                    {"id":1,"name":"portal考勤提醒","url":baseurl+"src/jetPortal.js"},
+                    {"id":2,"name":"测速网去广告","url":baseurl+"src/speedtest.js"},
+                    {"id":3,"name":"unicode-table去广告","url":baseurl+"src/unicodetable.js"},
+                    {"id":4,"name":"markdown文档插图解决方案","url":baseurl+"src/lightshotSave.js"},
+                    {"id":5,"name":"泛微自动登录","url":baseurl+"src/dpark_fw.js"},
+                    {"id":6,"name":"DomPortal自动登录","url":baseurl+"src/dpark_domportal.js"},
+                    {"id":7,"name":"HRM自动登录","url":baseurl+"src/dpark_hrm.js"},
+                    {"id":8,"name":"苏州大学成教在线教学平台","url":baseurl+"src/sudaxuexi.js"}
                 ],
                 "total":8
             }

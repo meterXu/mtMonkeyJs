@@ -38,7 +38,7 @@ const staticTime = {
 };
 let beatObj = {};
 let userInfo = {};
-$("head").append('<link href="https://server.isaacxu.com:4443/tampermonkey/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="https://mtmonkeyjs.netlify.app/css/jetPortal.css" rel="stylesheet">');
 // $("head").append('<link href="http://localhost/mtMonkeyJs/jetPortal.css" rel="stylesheet">');
 (function () {
     showSetting();

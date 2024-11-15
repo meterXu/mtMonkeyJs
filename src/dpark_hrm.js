@@ -13,7 +13,7 @@
 // @grant        GM_getValue
 // ==/UserScript==
 
-$("head").append('<link href="https://app.xdo.icu/tampermonkey/jetPortal.css" rel="stylesheet">');
+$("head").append('<link href="https://mtmonkeyjs.netlify.app/css/jetPortal.css" rel="stylesheet">');
 $(function () {
     initSetting()
     if(window.location.pathname.toLowerCase().indexOf('logon.aspx')>-1){

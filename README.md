@@ -2,11 +2,11 @@
 ![GitHub](https://img.shields.io/github/license/meterXu/mtMonkeyJs.svg)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/meterXu/mtMonkeyJs.svg)
 
-[在线脚本目录](https://server.isaacxu.com:4443/tampermonkey/)
+[在线脚本目录](https://mtmonkeyjs.netlify.app/)
 ## 脚本安装
 
 1. 下载插件离线包
-地址：[https://server.isaacxu.com:4443/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx](https://server.isaacxu.com:4443/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx)
+地址：[https://mtmonkeyjs.netlify.app/assets/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx](https://mtmonkeyjs.netlify.app/dhdgffkkebhmkfjojejmpbldmpobfkfo_5.0.1.crx)
 
 2. 安装插件
 
@@ -36,7 +36,7 @@
 
 ![管理面板](img/5.png)
 
-打开[脚本目录](https://server.isaacxu.com:4443/tampermonkey/)，在脚本列表界面选择需要安装的脚本，点击”复制链接“。
+打开[脚本目录](https://mtmonkeyjs.netlify.app/)，在脚本列表界面选择需要安装的脚本，点击”复制链接“。
 
 ![复制链接](img/6.png)
 
